@@ -1,10 +1,10 @@
 <!-- [ Sidebar Menu ] start -->
 <nav class="pc-sidebar">
   <div class="navbar-wrapper">
-    <div class="m-header">
+    <div class="m-header" style="padding-left: 15px; padding-top: 20px;">
       <a href="index.html" class="b-brand">
         <!-- ========   Change your logo from here   ============ -->
-        <img src="{{ url_for('static', filename='assets/images/logo-dark.svg') }}" alt="" class="logo logo-lg" />
+        <img src="{{ url_for('static', filename='assets/images/philips/philips-logo.png') }}" alt="" class="logo logo-lg" height=65px/>
       </a>
     </div>
     <div class="navbar-content">
@@ -13,9 +13,10 @@
           <label>Dashboard</label>
           <i class="ti ti-dashboard"></i>
         </li>
-        
+
+        {# Dashboard #}
         <li class="pc-item">
-          <a href="/" class="pc-link">
+          <a href="{{ url_for('home_blueprint.index') }}" class="pc-link">
             <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
             <span class="pc-mtext">Dashboard</span></a>
         </li>
@@ -24,6 +25,27 @@
           <label>Pages</label>
           <i class="ti ti-news"></i>
         </li>
+
+
+        {# Personal Information #}
+        <li class="pc-item">
+          <a href="{{ url_for('user_blueprint.personal_info') }}" class="pc-link"><span class="pc-micon"><i
+                class="ti ti-user"></i></span><span class="pc-mtext">Personal Info</span></a>
+        </li>
+
+        {# My Projects #}
+        <li class="pc-item">
+          <a href="{{ url_for('user_blueprint.my_projects') }}" class="pc-link"><span class="pc-micon"><i
+                class="ti ti-briefcase"></i></span><span class="pc-mtext">My Projects</span></a>
+        </li>
+
+        {# My Team #}
+        <li class="pc-item">
+          <a href="{{ url_for('user_blueprint.my_team') }}" class="pc-link"><span class="pc-micon"><i
+                class="ti ti-users"></i></span><span class="pc-mtext">My Team</span></a>
+        </li>
+
+        {# User Pages #}
         <li class="pc-item pc-hasmenu">
           <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-key"></i></span><span
               class="pc-mtext">User Pages</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
@@ -38,40 +60,53 @@
 
           </ul>
         </li>
+
         <li class="pc-item pc-caption">
           <label>Elements</label>
           <i class="ti ti-apps"></i>
         </li>
+
+        {# Typography #}
         <li class="pc-item">
           <a href="{{ url_for('home_blueprint.typography') }}" class="pc-link"><span class="pc-micon"><i
                 class="ti ti-typography"></i></span><span class="pc-mtext">Typography</span></a>
         </li>
+
+        {# Color #}
         <li class="pc-item">
           <a href="{{ url_for('home_blueprint.color') }}" class="pc-link"><span class="pc-micon"><i class="ti ti-brush"></i></span><span
               class="pc-mtext">Color</span></a>
         </li>
+
+        {# Tabler #}
         <li class="pc-item">
           <a href="{{ url_for('home_blueprint.icon_tabler') }}" class="pc-link"><span class="pc-micon"><i
                 class="ti ti-plant-2"></i></span><span class="pc-mtext">Tabler</span><span class="pc-arrow"></a>
         </li>
 
-        <li class="pc-item pc-caption">
-          <label>Other</label>
-          <i class="ti ti-brand-chrome"></i>
-        </li>
-        <li class="pc-item">
-          <a href="{{ url_for('home_blueprint.sample_page') }}" class="pc-link"><span class="pc-micon"><i
-                class="ti ti-brand-chrome"></i></span><span class="pc-mtext">Sample page</span></a></li>
-        <li class="pc-item">
-          <a href="https://github.com/app-generator/flask-berry-dashboard" target="_blank" class="pc-link"><span
-              class="pc-micon"><i class="ti ti-vocabulary"></i></span><span class="pc-mtext">DOCS</span></a></li>
+{#        <li class="pc-item pc-caption">#}
+{#          <label>Other</label>#}
+{#          <i class="ti ti-brand-chrome"></i>#}
+{#        </li>#}
+{#      #}
+        {# Sample Page #}
+{#        <li class="pc-item">#}
+{#          <a href="{{ url_for('home_blueprint.sample_page') }}" class="pc-link"><span class="pc-micon"><i#}
+{#                class="ti ti-brand-chrome"></i></span><span class="pc-mtext">Sample page</span></a>#}
+{#        </li>#}
+{#      #}
+        {# DOCS #}
+{#        <li class="pc-item">#}
+{#          <a href="https://github.com/app-generator/flask-berry-dashboard" target="_blank" class="pc-link"><span#}
+{#              class="pc-micon"><i class="ti ti-vocabulary"></i></span><span class="pc-mtext">DOCS</span></a>#}
+{#        </li>#}
       </ul>
-      <div class="pc-navbar-card bg-primary rounded">
-        <h4 class="text-white">Berry Bootstrap 5</h4>
-        <p class="text-white opacity-75">Open-Source Theme</p>
-        <a href="https://appseed.us/product/berry-dashboard/flask/"  
-           target="_blank" class="btn btn-light text-primary">Download</a>
-      </div>
+{#      <div class="pc-navbar-card bg-primary rounded">#}
+{#        <h4 class="text-white">Berry Bootstrap 5</h4>#}
+{#        <p class="text-white opacity-75">Open-Source Theme</p>#}
+{#        <a href="https://appseed.us/product/berry-dashboard/flask/"  #}
+{#           target="_blank" class="btn btn-light text-primary">Download</a>#}
+{#      </div>#}
     </div>
   </div>
 </nav>

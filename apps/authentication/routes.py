@@ -13,7 +13,7 @@ from flask_login import (
 from apps import db, login_manager
 from apps.authentication import blueprint
 from apps.authentication.forms import LoginForm, CreateAccountForm
-from apps.authentication.models import User, UserPermission
+from apps.authentication.models import User, UserPermission, Team, Role
 
 from apps.authentication.util import verify_pass
 
@@ -24,7 +24,6 @@ def route_default():
 
 
 # Login & Registration
-
 @blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm(request.form)
@@ -37,10 +36,15 @@ def login():
             # Locate user
             user = User.query.filter_by(email=email).first()
 
+            # # Check Role and Team
+            # role = Role.query.filter_by(id=user.role_id).first()
+            # team = User.query.filter_by(id=user.team_id).first()
+
             # Check the password
             if user and verify_pass(password, user.password):
 
                 login_user(user)
+
                 return redirect(url_for('authentication_blueprint.route_default'))
 
             # Something (user or pass) is not ok
