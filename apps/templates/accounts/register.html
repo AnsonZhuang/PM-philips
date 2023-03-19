@@ -2,6 +2,21 @@
 
 {% block title %} SignUp {% endblock title %}
 
+{% block extrastyle %}
+    <style>
+    {# logo at the login & register page #}
+    #register-logo{
+        margin-left: 12px;
+        height: 100px;
+    }
+    {# 'Sign Up' #}
+    #register-header{
+        height: 70px;
+        padding-bottom: 10px;
+    }
+    </style>
+{% endblock extrastyle %}
+
 {% block content %}
   <div class="auth-main">
     <div class="auth-wrapper v3">
@@ -9,11 +24,11 @@
         <div class="card mt-5">
           <div class="card-body">
             <a href="#" class="d-flex justify-content-center mt-3">
-              <img src="{{ url_for('static', filename='assets/images/logo-dark.svg') }}" />
+              <img id="register-logo" src="{{ url_for('static', filename='assets/images/philips/philips-logo-2.png') }}" height=78px/>
             </a>
             <div class="row">
-              <div class="d-flex justify-content-center">
-                <div class="auth-header">
+              <div class="d-fex justify-content-center">
+                <div id='register-header' class="auth-header">
                   <h2 class="text-secondary mt-5"><b>Sign up</b></h2>
                 </div>
               </div>
@@ -37,20 +52,29 @@
               {% endif %} 
 
             </h5>
-
+            {# Register Successfully #}
             {% if success %}
 
               <hr />
               <h5 class="d-flex justify-content-center"> 
                 <a href="{{ url_for('authentication_blueprint.login') }}" class="btn btn-secondary p-2">Sign IN</a>
               </h5>              
-
+            {# Register #}
             {% else %}
 
               <form role="form" method="post" action="">
-
-                {{ form.hidden_tag() }} 
-
+                {# For CSRF #}
+                {{ form.hidden_tag() }}
+                {# 1 id #}
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-floating mb-3">
+                      {{ form.id(placeholder="id", class="form-control", oninput="value=value.replace(/[^\d]/g,'')") }}
+                      <label for="floatingInput">id</label>
+                    </div>
+                  </div>
+                </div>
+                {# 2 Username #}
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-floating mb-3">
@@ -59,14 +83,24 @@
                     </div>
                   </div>
                 </div>
+                {# 3 Email #}
                 <div class="form-floating mb-3">
                   {{ form.email(placeholder="Email", class="input form-control", type="email") }}
                   <label for="floatingInput">Email Address</label>
                 </div>
+                {# 4 Password #}
                 <div class="form-floating mb-3">
                   {{ form.password(placeholder="Password", class="form-control", type="password") }}
                   <label for="floatingInput">Password</label>
                 </div>
+                {# 5 Password Confirm #}
+                <div class="form-floating mb-3">
+                  {{ form.password_confirm(placeholder="Password-Confirm", class="form-control", type="password") }}
+                  <label for="floatingInput">Password Confirm</label>
+                </div>
+
+
+
                 <div class="form-check mt-3s">
                   <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
                   <label class="form-check-label" for="customCheckc1">

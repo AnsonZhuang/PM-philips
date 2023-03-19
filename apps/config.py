@@ -5,7 +5,6 @@ Copyright (c) 2019 - present AppSeed.us
 
 import os, random, string
 
-
 # from dotenv import load_dotenv
 
 class Config(object):

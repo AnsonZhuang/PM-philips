@@ -2,18 +2,33 @@
 
 {% block title %} Login {% endblock title %}
 
+{% block extrastyle %}
+    <style>
+    {# logo at the login & register page #}
+    #login-logo{
+        margin-left: 12px;
+        height: 100px;
+    }
+    {# 'Hi, Welcome Back' #}
+    #login-header{
+        height: 70px;
+        padding-bottom: 10px;
+    }
+    </style>
+{% endblock extrastyle %}
+
 {% block content %}
   <div class="auth-main">
     <div class="auth-wrapper v3">
       <div class="auth-form">
         <div class="card my-5">
           <div class="card-body">
-            <a href="#" class="d-flex justify-content-center">
-              <img src="{{ url_for('static', filename='assets/images/logo-dark.svg') }}" />
+            <a id="welcome" href="#" class="d-flex justify-content-center">
+              <img id="login-logo" src="{{ url_for('static', filename='assets/images/philips/philips-logo-2.png') }}"/>
             </a>
             <div class="row">
               <div class="d-flex justify-content-center">
-                <div class="auth-header">
+                <div id="login-header" class="auth-header">
                   <h2 class="text-secondary mt-5"><b>Hi, Welcome Back</b></h2>
                 </div>
               </div>
@@ -41,22 +56,25 @@
             </h5>
             
             <form role="form" method="post" action="">
-
+              {# For CSRF #}
               {{ form.hidden_tag() }}
-
+              {# Email #}
               <div class="form-floating mb-3">
-                {{ form.username(placeholder="Username", class="form-control") }}
-                <label for="floatingInput">Username</label>
+                {{ form.email(placeholder="Email", class="form-control") }}
+                <label for="floatingInput">Email</label>
               </div>
+              {# Password #}
               <div class="form-floating mb-3">
                 {{ form.password(placeholder="Password", class="form-control", type="password") }}
                 <label for="floatingInput">Password</label>
               </div>
               <div class="d-flex mt-1 justify-content-between">
+                {# Remember me #}
                 <div class="form-check">
                   <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
                   <label class="form-check-label text-muted" for="customCheckc1">Remember me</label>
                 </div>
+                {# Forgot Password #}
                 <h5 class="text-secondary">
                   <a href="{{ url_for('home_blueprint.password_reset') }}">Forgot Password?</a>
                 </h5>
