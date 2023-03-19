@@ -34,17 +34,38 @@
               <h2>Personal Info</h2>
             </div>
             <div class="card-body">
-{#              <h1>h1. Heading</h1>#}
-{#              <div class="clearfix"></div>#}
-{#              <h2>h2. Heading</h2>#}
-{#              <div class="clearfix"></div>#}
-{#              <h3>This is a H3</h3>#}
-{#              <div class="clearfix"></div>#}
-{#              <h4>This is a H4</h4>#}
-{#              <div class="clearfix"></div>#}
-{#              <h5>This is a H5</h5>#}
-{#              <div class="clearfix"></div>#}
-{#              <h6>This is a H6</h6>#}
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th>ID:</th>
+                    <td>{{ current_user.id }}</td>
+                  </tr>
+                  <tr>
+                    <th>Username:</th>
+                    <td>{{ current_user.username }}</td>
+                  </tr>
+                  <tr>
+                    <th>Email:</th>
+                    <td>{{ current_user.email }}</td>
+                  </tr>
+                  <tr>
+                    <th>Role:</th>
+                    <td>{{ current_user.role.name }}</td>
+                  </tr>
+                  <tr>
+                    <th>Team:</th>
+                    <td>{{ current_user.team.short_name }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <form action="" method="POST">
+                <div class="mb-3">
+                  <label for="inputFirst" class="form-label">Change your username:</label>
+                  <input type="text" class="form-control" id="inputFirst" name="first_name" value="{{ current_user.name }}">
+                </div>
+                <button type="button" class="btn btn-primary">Update username</button>
+{#                <button type="submit" class="btn btn-primary">Update username</button>#}
+              </form>
             </div>
           </div>
         </div>

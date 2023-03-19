@@ -31,22 +31,50 @@
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
-              <h5>Headings</h5>
-              <p><span class="badges">.h1</span> through .h6 classes are also available, for when you want to match the font styling of a
-                heading but cannot use the associated HTML element.</p>
+              <h2>My Projects</h2>
             </div>
             <div class="card-body">
-              <h1>h1. Heading</h1>
-              <div class="clearfix"></div>
-              <h2>h2. Heading</h2>
-              <div class="clearfix"></div>
-              <h3>This is a H3</h3>
-              <div class="clearfix"></div>
-              <h4>This is a H4</h4>
-              <div class="clearfix"></div>
-              <h5>This is a H5</h5>
-              <div class="clearfix"></div>
-              <h6>This is a H6</h6>
+                <div class="container">
+                  <h1>Example Project</h1>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Jan</th>
+                        <th>Feb</th>
+                        <th>Mar</th>
+                        <th>Apr</th>
+                        <th>May</th>
+                        <th>Jun</th>
+                        <th>Jul</th>
+                        <th>Aug</th>
+                        <th>Sep</th>
+                        <th>Oct</th>
+                        <th>Nov</th>
+                        <th>Dec</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for project in projects %}
+                        <tr>
+                          <td>{{ project.id }}</td>
+                          <td>{{ project.Jan }}</td>
+                          <td>{{ project.Feb }}</td>
+                          <td>{{ project.Mar }}</td>
+                          <td>{{ project.Apr }}</td>
+                          <td>{{ project.May }}</td>
+                          <td>{{ project.Jun }}</td>
+                          <td>{{ project.Jul }}</td>
+                          <td>{{ project.Aug }}</td>
+                          <td>{{ project.Sep }}</td>
+                          <td>{{ project.Oct }}</td>
+                          <td>{{ project.Nov }}</td>
+                          <td>{{ project.Dec }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
             </div>
           </div>
         </div>
