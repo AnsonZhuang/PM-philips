@@ -42,11 +42,17 @@
             </div>
             -->
             <h5 class="my-4 d-flex justify-content-center">
-              
+
               {% if msg %}
-                <span>
+                {% if success %}
+                <span class="text-success">
                   {{ msg | safe }}
                 </span>
+                {% else %}
+                <span class="text-danger">
+                  {{ msg | safe }}
+                </span>
+                {% endif %}
               {% else %}
                 Add your credentials
               {% endif %} 
@@ -65,38 +71,49 @@
               <form role="form" method="post" action="">
                 {# For CSRF #}
                 {{ form.hidden_tag() }}
+
                 {# 1 id #}
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-floating mb-3">
                       {{ form.id(placeholder="id", class="form-control", oninput="value=value.replace(/[^\d]/g,'')") }}
                       <label for="floatingInput">id</label>
+                      <small class="form-text text-muted">&nbsp&nbsp&nbsp id should be 0-999999999.</small>
                     </div>
                   </div>
                 </div>
+
                 {# 2 Username #}
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-floating mb-3">
                       {{ form.username(placeholder="Username", class="form-control") }}
                       <label for="floatingInput">Username</label>
+                      <small class="form-text text-muted">&nbsp&nbsp&nbsp Username should be 2-36 characters long.</small>
                     </div>
                   </div>
                 </div>
+
                 {# 3 Email #}
                 <div class="form-floating mb-3">
                   {{ form.email(placeholder="Email", class="input form-control", type="email") }}
                   <label for="floatingInput">Email Address</label>
+                  <small class="form-text text-muted">&nbsp&nbsp&nbsp Your email address will be used for login.</small>
                 </div>
+
+
                 {# 4 Password #}
                 <div class="form-floating mb-3">
                   {{ form.password(placeholder="Password", class="form-control", type="password") }}
                   <label for="floatingInput">Password</label>
+                  <small class="form-text text-muted">&nbsp&nbsp&nbsp Password should be 6-20 characters long.</small>
                 </div>
+
                 {# 5 Password Confirm #}
                 <div class="form-floating mb-3">
                   {{ form.password_confirm(placeholder="Password-Confirm", class="form-control", type="password") }}
                   <label for="floatingInput">Password Confirm</label>
+                  <small class="form-text text-muted">&nbsp&nbsp&nbsp Enter your password again.</small>
                 </div>
 
 
