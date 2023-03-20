@@ -123,29 +123,30 @@ function floatchart() {
       },
       plotOptions: {
         bar: {
-          horizontal: false,
+          horizontal: true,
           columnWidth: '50%'
         }
       },
       dataLabels: {
-        enabled: false
+        enabled: true
+
       },
-      colors: ['#d3eafd', '#2196f3', '#673ab7', '#e1d8f1'],
+      colors: ['#00fffa', '#2196f3', '#673ab7', '#cb38ff'],
       series: [
         {
-          name: 'Investment',
+          name: 'Rubicon 2.0',
           data: [35, 125, 35, 35, 35, 80, 35, 20, 35, 45, 15, 75]
         },
         {
-          name: 'Loss',
+          name: 'Intrepid NMPA',
           data: [35, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75]
         },
         {
-          name: 'Profit',
+          name: 'DFM100 NBP Overpressue',
           data: [35, 145, 35, 35, 20, 105, 100, 10, 65, 45, 30, 10]
         },
         {
-          name: 'Maintenance',
+          name: 'ECR Sustaining ALS',
           data: [0, 0, 75, 0, 0, 115, 0, 0, 0, 0, 150, 0]
         }
       ],
@@ -172,7 +173,7 @@ function floatchart() {
         theme: 'dark'
       }
     };
-    var chart = new ApexCharts(document.querySelector('#growthchart22'), options);
+    var chart = new ApexCharts(document.querySelector('#growthchart'), options);
     chart.render();
   })();
 

@@ -8,14 +8,51 @@ from datetime import datetime, date
 from apps import db, login_manager
 from apps.authentication.util import hash_pass
 
-# multi User - multi Project
-UserToProject = db.Table('user_to_project', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-                         db.Column('project_id', db.Integer, db.ForeignKey('project.id')))
+# multi-user - multi-project
+# members of projects
+# P.S. Sometimes we only assign projects to users, but not decide the lasting years of the projects
+UserToProject = db.Table('user_to_project',
+                         db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+                         db.Column('project_id', db.Integer, db.ForeignKey('project.id'), primary_key=True)
+                         )
 
+# multi-project - multi-year
+# Some project P is active in some year Y, i.e., in Y, some members of the project assign resource to
+# the project, thus for each member M of the project, an entry E representing: the project resource of
+# each month in Y assigned to P by M should be added to the table UserToYearOfProject.
+# P.S. Sometimes we only decide the lasting years of the projects, but not assign projects to users
+YearOfProject = db.Table('year_of_project',
+                         # db.Column('project_year', db.Integer, primary_key=True),
+                         db.Column('project_id', db.Integer, db.ForeignKey('project.id'), primary_key=True),
+                         db.Column('year', db.Integer, primary_key=True)
+                         )
+
+# single-year_of_project - multi-user
+# For a YearOfProject(Y-P) entry, each member of the P will have an entry in this table to display their
+# resource assigned to P in Y
+# UserToYearOfProject = db.Table('user_to_year_of_project',
+#                                db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+#                                db.Column('project_id', db.Integer, db.ForeignKey('year_of_project.project_id'),
+#                                          primary_key=True),
+#                                db.Column('year', db.Integer, db.ForeignKey('year_of_project.year'), primary_key=True),
+#                                db.Column('Jan', db.Integer),
+#                                db.Column('Feb', db.Integer),
+#                                db.Column('Mar', db.Integer),
+#                                db.Column('Apr', db.Integer),
+#                                db.Column('May', db.Integer),
+#                                db.Column('Jun', db.Integer),
+#                                db.Column('Jul', db.Integer),
+#                                db.Column('Aug', db.Integer),
+#                                db.Column('Sep', db.Integer),
+#                                db.Column('Oct', db.Integer),
+#                                db.Column('Nov', db.Integer),
+#                                db.Column('Dec', db.Integer),
+#                                )
 
 # multi Manager - multi Team
 ManagerToTeam = db.Table('manager_to_team', db.Column('manager_id', db.Integer, db.ForeignKey('user.id')),
-                         db.Column('team_id', db.Integer, db.ForeignKey('team.id')))
+                         db.Column('team_id', db.Integer, db.ForeignKey('team.id'))
+                         )
 
 
 class User(db.Model, UserMixin):
@@ -89,20 +126,24 @@ class Project(db.Model):
     # [id] of e.g. A/B/C/D
     # multi Project - single Priority
     priority_id = db.Column(db.Integer, db.ForeignKey("project_priority.id"), nullable=False)
-    priority = db.relationship("ProjectPriority", uselist=False, foreign_keys='Project.priority_id', back_populates="projects")
+    priority = db.relationship("ProjectPriority", uselist=False, foreign_keys='Project.priority_id',
+                               back_populates="projects")
 
     # e.g. [id] of DFM100
     # multi Project - single Product
     product_id = db.Column(db.Integer, db.ForeignKey("project_product.id"), nullable=False)
-    product = db.relationship("ProjectProduct", uselist=False, foreign_keys='Project.product_id', back_populates="projects")
+    product = db.relationship("ProjectProduct", uselist=False, foreign_keys='Project.product_id',
+                              back_populates="projects")
 
     # Creator-项目创建者 # multi Project - single User = Creator
     creator_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    creator = db.relationship('User', uselist=False, foreign_keys='Project.creator_id', back_populates='created_projects')
+    creator = db.relationship('User', uselist=False, foreign_keys='Project.creator_id',
+                              back_populates='created_projects')
 
     # Manager-项目管理者 # multi Project - single User = Project Manager
     manager_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    manager = db.relationship('User', uselist=False, foreign_keys='Project.manager_id', back_populates='managed_projects')
+    manager = db.relationship('User', uselist=False, foreign_keys='Project.manager_id',
+                              back_populates='managed_projects')
 
     # ==========项目相关时间==========
     # 项目在系统中被创建的时间
@@ -205,7 +246,7 @@ class ProjectPriority(db.Model):
     __tablename__ = 'project_priority'
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)
     # single Priority - multi Project
-    name = db.Column(db.VARCHAR(20), nullable=False, unique = True)
+    name = db.Column(db.VARCHAR(20), nullable=False, unique=True)
     projects = db.relationship("Project", uselist=True, back_populates="priority")
 
     def __repr__(self):

@@ -17,6 +17,7 @@ class Config(object):
     FLASK_ENV = os.getenv('FLASK_ENV', None)
     FLASK_DEBUG = os.getenv('DEBUG', None)
 
+
     # Set up the App SECRET_KEY
     SECRET_KEY = os.getenv('SECRET_KEY', None)
     if not SECRET_KEY:

@@ -45,13 +45,15 @@
                 class="ti ti-users"></i></span><span class="pc-mtext">My Team</span></a>
         </li>
 
-        {# User Pages #}
+        {# User Operations #}
         <li class="pc-item pc-hasmenu">
-          <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-key"></i></span><span
-              class="pc-mtext">User Pages</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-leaf"></i></span><span
+              class="pc-mtext">User Operations</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
           <ul class="pc-submenu">
 
             {% if current_user.is_authenticated %}
+              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.add_example_project') }}">Add Example Project</a></li>
+{#              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.join_example_project') }}">Join Example Project</a></li>#}
               <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.logout') }}">Logout</a></li>
             {% else %}
               <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.login') }}">Login</a></li>
@@ -79,10 +81,10 @@
 {#        </li>#}
 {##}
         {# Tabler #}
-{#        <li class="pc-item">#}
-{#          <a href="{{ url_for('home_blueprint.icon_tabler') }}" class="pc-link"><span class="pc-micon"><i#}
-{#                class="ti ti-plant-2"></i></span><span class="pc-mtext">Tabler</span><span class="pc-arrow"></a>#}
-{#        </li>#}
+        <li class="pc-item">
+          <a href="{{ url_for('home_blueprint.icon_tabler') }}" class="pc-link"><span class="pc-micon"><i
+                class="ti ti-plant-2"></i></span><span class="pc-mtext">Tabler</span><span class="pc-arrow"></a>
+        </li>
 
 {#        <li class="pc-item pc-caption">#}
 {#          <label>Other</label>#}
