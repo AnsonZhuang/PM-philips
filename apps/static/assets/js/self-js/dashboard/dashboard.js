@@ -4,116 +4,117 @@ document.addEventListener('DOMContentLoaded', function () {
     floatchart();
   }, 500);
 });
-
 function floatchart() {
-  //  function 1
-  (function () {
-    var options = {
-      chart: {
-        type: 'line',
-        height: 90,
-        sparkline: {
-          enabled: true
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      colors: ['#FFF'],
-      stroke: {
-        curve: 'smooth',
-        width: 3
-      },
-      series: [
-        {
-          name: 'series1',
-          data: [45, 66, 41, 89, 25, 44, 9, 54]
-        }
-      ],
-      yaxis: {
-        min: 5,
-        max: 95
-      },
-      tooltip: {
-        theme: 'dark',
-        fixed: {
-          enabled: false
-        },
-        x: {
-          show: false
-        },
-        y: {
-          title: {
-            formatter: function (seriesName) {
-              return 'Total Earning';
-            }
-          }
-        },
-        marker: {
-          show: false
-        }
-      }
-    };
-    var chart = new ApexCharts(document.querySelector('#tab-chart-1'), options);
-    chart.render();
-  })();
 
-  //  function 2
-  (function () {
-    var options = {
-      chart: {
-        type: 'line',
-        height: 90,
-        sparkline: {
-          enabled: true
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      colors: ['#FFF'],
-      stroke: {
-        curve: 'smooth',
-        width: 3
-      },
-      series: [
-        {
-          name: 'series1',
-          data: [35, 44, 9, 54, 45, 66, 41, 69]
-        }
-      ],
-      yaxis: {
-        min: 5,
-        max: 95
-      },
-      tooltip: {
-        theme: 'dark',
-        fixed: {
-          enabled: false
-        },
-        x: {
-          show: false
-        },
-        y: {
-          title: {
-            formatter: function (seriesName) {
-              return 'Total Earning';
-            }
-          }
-        },
-        marker: {
-          show: false
-        }
-      }
-    };
-    var chart = new ApexCharts(document.querySelector('#tab-chart-2'), options);
-    chart.render();
-  })();
+  // //  function 1
+  // (function () {
+  //   var options = {
+  //     chart: {
+  //       type: 'line',
+  //       height: 90,
+  //       sparkline: {
+  //         enabled: true
+  //       }
+  //     },
+  //     dataLabels: {
+  //       enabled: false
+  //     },
+  //     colors: ['#FFF'],
+  //     stroke: {
+  //       curve: 'smooth',
+  //       width: 3
+  //     },
+  //     series: [
+  //       {
+  //         name: 'series1',
+  //         data: [45, 66, 41, 89, 25, 44, 9, 54]
+  //       }
+  //     ],
+  //     yaxis: {
+  //       min: 5,
+  //       max: 95
+  //     },
+  //     tooltip: {
+  //       theme: 'dark',
+  //       fixed: {
+  //         enabled: false
+  //       },
+  //       x: {
+  //         show: false
+  //       },
+  //       y: {
+  //         title: {
+  //           formatter: function (seriesName) {
+  //             return 'Total Earning';
+  //           }
+  //         }
+  //       },
+  //       marker: {
+  //         show: false
+  //       }
+  //     }
+  //   };
+  //   var chart = new ApexCharts(document.querySelector('#tab-chart-1'), options);
+  //   chart.render();
+  // })();
+  //
+  // //  function 2
+  // (function () {
+  //   var options = {
+  //     chart: {
+  //       type: 'line',
+  //       height: 90,
+  //       sparkline: {
+  //         enabled: true
+  //       }
+  //     },
+  //     dataLabels: {
+  //       enabled: false
+  //     },
+  //     colors: ['#FFF'],
+  //     stroke: {
+  //       curve: 'smooth',
+  //       width: 3
+  //     },
+  //     series: [
+  //       {
+  //         name: 'series1',
+  //         data: [35, 44, 9, 54, 45, 66, 41, 69]
+  //       }
+  //     ],
+  //     yaxis: {
+  //       min: 5,
+  //       max: 95
+  //     },
+  //     tooltip: {
+  //       theme: 'dark',
+  //       fixed: {
+  //         enabled: false
+  //       },
+  //       x: {
+  //         show: false
+  //       },
+  //       y: {
+  //         title: {
+  //           formatter: function (seriesName) {
+  //             return 'Total Earning';
+  //           }
+  //         }
+  //       },
+  //       marker: {
+  //         show: false
+  //       }
+  //     }
+  //   };
+  //   var chart = new ApexCharts(document.querySelector('#tab-chart-2'), options);
+  //   chart.render();
+  // })();
 
-  //  function 3
+  // function 3 Resource This Year/Month
   (function () {
     var options = {
       chart: {
+        id: 'growthchart',
         type: 'bar',
         height: 480,
         stacked: true,
@@ -131,25 +132,8 @@ function floatchart() {
         enabled: true
 
       },
-      colors: ['#00fffa', '#2196f3', '#673ab7', '#cb38ff'],
-      series: [
-        {
-          name: 'Rubicon 2.0',
-          data: [35, 125, 35, 35, 35, 80, 35, 20, 35, 45, 15, 75]
-        },
-        {
-          name: 'Intrepid NMPA',
-          data: [35, 15, 15, 35, 65, 40, 80, 25, 15, 85, 25, 75]
-        },
-        {
-          name: 'DFM100 NBP Overpressue',
-          data: [35, 145, 35, 35, 20, 105, 100, 10, 65, 45, 30, 10]
-        },
-        {
-          name: 'ECR Sustaining ALS',
-          data: [0, 0, 75, 0, 0, 115, 0, 0, 0, 0, 150, 0]
-        }
-      ],
+      colors: ['#00fffa', '#2196f3', '#673ab7', '#3a034b', '#cb38ff', '#ac6262'],
+      series: personal_resource_this_year,
       responsive: [
         {
           breakpoint: 480,
@@ -175,7 +159,156 @@ function floatchart() {
     };
     var chart = new ApexCharts(document.querySelector('#growthchart'), options);
     chart.render();
+
+    var chartSelector = document.getElementById('resource-chart-selector');
+    chartSelector.addEventListener('change', function (){
+      var selectedValue = chartSelector.value;
+      // 年度 - 个人资源 - 条形堆叠图
+      if (selectedValue === 'This Year - Stack') {
+        chart.updateOptions({
+          chart: {
+            id: 'growthchart',
+            type: 'bar',
+            height: 480,
+            stacked: true,
+            toolbar: {
+              show: true
+            }
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              columnWidth: '50%'
+            }
+          },
+          dataLabels: {
+            enabled: true
+
+          },
+          colors: ['#00fffa', '#2196f3', '#673ab7', '#3a034b', '#cb38ff', '#ac6262'],
+          series: personal_resource_this_year,
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: 'bottom',
+                  offsetX: -10,
+                  offsetY: 0
+                }
+              }
+            }
+          ],
+          xaxis: {
+            type: 'category',
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          },
+          grid: {
+            strokeDashArray: 4
+          },
+          tooltip: {
+            theme: 'dark'
+          }
+        })
+      // 年度 - 个人资源 - 条形比较图
+      }else if(selectedValue === 'This Year - Parallel'){
+        chart.updateOptions({
+          chart: {
+            id: 'growthchart',
+            type: 'bar',
+            height: 480,
+            stacked: false,
+            toolbar: {
+              show: true
+            }
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              columnWidth: '50%'
+            }
+          },
+          dataLabels: {
+            enabled: false
+          },
+          colors: ['#00fffa', '#2196f3', '#673ab7', '#3a034b', '#cb38ff', '#ac6262'],
+          series: personal_resource_this_year,
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: 'bottom',
+                  offsetX: -10,
+                  offsetY: 0
+                }
+              }
+            }
+          ],
+          xaxis: {
+            type: 'category',
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+          },
+          grid: {
+            strokeDashArray: 4
+          },
+          tooltip: {
+            theme: 'dark'
+          }
+        })
+      }
+      // 月度 - 个人资源 - 比例图
+      else if(selectedValue === 'This Month - Donut'){
+        chart.updateOptions({
+          chart: {
+              type: 'donut',
+              width: '100%',
+              height: 400,
+
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          plotOptions: {
+            pie: {
+              customScale: 0.8,
+              donut: {
+                size: '75%',
+              },
+              offsetY: 20,
+            },
+            stroke: {
+              colors: undefined
+            }
+          },
+            colors: ['#00D8B6','#008FFB',  '#FEB019', '#FF4560', '#775DD0'],
+          title: {
+            text: 'Department Sales',
+            style: {
+              fontSize: '18px'
+            }
+          },
+          series: personal_resource_this_month['series'],
+          labels: personal_resource_this_month['labels'],
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: 'bottom',
+                  offsetX: -10,
+                  offsetY: 0
+                }
+              }
+            }
+          ]
+        })
+      }
+    });
   })();
+
+
+
 
   //  function 4
   (function () {

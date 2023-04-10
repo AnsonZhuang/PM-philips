@@ -22,32 +22,42 @@ UserToProject = db.Table('user_to_project',
 # each month in Y assigned to P by M should be added to the table UserToYearOfProject.
 # P.S. Sometimes we only decide the lasting years of the projects, but not assign projects to users
 YearOfProject = db.Table('year_of_project',
-                         # db.Column('project_year', db.Integer, primary_key=True),
                          db.Column('project_id', db.Integer, db.ForeignKey('project.id'), primary_key=True),
                          db.Column('year', db.Integer, primary_key=True)
                          )
 
-# single-year_of_project - multi-user
-# For a YearOfProject(Y-P) entry, each member of the P will have an entry in this table to display their
-# resource assigned to P in Y
-# UserToYearOfProject = db.Table('user_to_year_of_project',
-#                                db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-#                                db.Column('project_id', db.Integer, db.ForeignKey('year_of_project.project_id'),
-#                                          primary_key=True),
-#                                db.Column('year', db.Integer, db.ForeignKey('year_of_project.year'), primary_key=True),
-#                                db.Column('Jan', db.Integer),
-#                                db.Column('Feb', db.Integer),
-#                                db.Column('Mar', db.Integer),
-#                                db.Column('Apr', db.Integer),
-#                                db.Column('May', db.Integer),
-#                                db.Column('Jun', db.Integer),
-#                                db.Column('Jul', db.Integer),
-#                                db.Column('Aug', db.Integer),
-#                                db.Column('Sep', db.Integer),
-#                                db.Column('Oct', db.Integer),
-#                                db.Column('Nov', db.Integer),
-#                                db.Column('Dec', db.Integer),
-#                                )
+
+# Resource - user~project~year
+# For a project P and a year Y, each member M of P will have an entry in this table
+# to display their resource assigned to P in Y
+class Resource(db.Model):
+    __tablename__ = 'resource'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    user = db.relationship('User', uselist=False, foreign_keys='Resource.user_id', back_populates='resources')
+
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), primary_key=True)
+    project = db.relationship('Project', uselist=False, foreign_keys='Resource.project_id', back_populates='resources')
+
+    year = db.Column(db.Integer, primary_key=True)
+
+    Jan = db.Column(db.Integer, nullable=True)
+    Feb = db.Column(db.Integer, nullable=True)
+    Mar = db.Column(db.Integer, nullable=True)
+    Apr = db.Column(db.Integer, nullable=True)
+    May = db.Column(db.Integer, nullable=True)
+    Jun = db.Column(db.Integer, nullable=True)
+    Jul = db.Column(db.Integer, nullable=True)
+    Aug = db.Column(db.Integer, nullable=True)
+    Sep = db.Column(db.Integer, nullable=True)
+    Oct = db.Column(db.Integer, nullable=True)
+    Nov = db.Column(db.Integer, nullable=True)
+    Dec = db.Column(db.Integer, nullable=True)
+
+    __table_args__ = (
+        db.PrimaryKeyConstraint('user_id', 'project_id', 'year'),
+        db.ForeignKeyConstraint(('project_id', 'year'), ('year_of_project.project_id', 'year_of_project.year'))
+    )
+
 
 # multi Manager - multi Team
 ManagerToTeam = db.Table('manager_to_team', db.Column('manager_id', db.Integer, db.ForeignKey('user.id')),
@@ -98,6 +108,9 @@ class User(db.Model, UserMixin):
 
     # 用户操作Project的日志
     project_operation_log = db.relationship('ProjectOperationLog', uselist=True, back_populates='user')
+
+    # 用户相关的资源
+    resources = db.relationship('Resource', uselist=True, foreign_keys='Resource.user_id', back_populates='user')
 
     def __init__(self, **kwargs):
         for property, value in kwargs.items():
@@ -167,14 +180,16 @@ class Project(db.Model):
     description = db.Column(db.VARCHAR(500), nullable=True)
     # 项目具体计划
     plan = db.Column(db.VARCHAR(500), nullable=True)
-    # 项目表名
-    resource_table_name = db.Column(db.VARCHAR(100), nullable=True)
     # ==========非数据库字段 仅反向引用属性==========
     # multi Project - multi User
     users = db.relationship('User', secondary=UserToProject, back_populates='involved_projects')
 
     # Project的日志
     log = db.relationship('ProjectOperationLog', uselist=True, back_populates='project')
+
+    # Project 相关的资源
+    resources = db.relationship('Resource', uselist=True, foreign_keys='Resource.project_id',
+                                back_populates='project')
 
     def __repr__(self):
         return str(self.name)

@@ -1,0 +1,143 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} My Projects {% endblock title %}
+
+{% block content %}
+  <!-- [ Main Content ] start -->
+  <div class="pc-container">
+    <div class="pc-content">
+      <!-- [ breadcrumb ] start -->
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <div class="page-header-title">
+                <h5 class="m-b-10">Pages</h5>
+              </div>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Pages</a></li>
+                <li class="breadcrumb-item" aria-current="page">My Projects</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ breadcrumb ] end -->
+
+
+      <!-- [ Main Content ] start -->
+      <div class="row">
+        <!-- [ Typography ] start -->
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h2>My Projects</h2>
+            </div>
+            <div class="card-body">
+                <div class="container">
+                  {% if resource %}
+                      {% for each_project in resource %}
+                      <h3 style="position:center">{{ each_project['name'] }}</h3>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Year</th>
+                            <th>Jan</th>
+                            <th>Feb</th>
+                            <th>Mar</th>
+                            <th>Apr</th>
+                            <th>May</th>
+                            <th>Jun</th>
+                            <th>Jul</th>
+                            <th>Aug</th>
+                            <th>Sep</th>
+                            <th>Oct</th>
+                            <th>Nov</th>
+                            <th>Dec</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for each_record in each_project['data'] %}
+                            <tr>
+                              <td>{{ each_record.year }}</td>
+                              <td>{{ each_record.Jan }}</td>
+                              <td>{{ each_record.Feb }}</td>
+                              <td>{{ each_record.Mar }}</td>
+                              <td>{{ each_record.Apr }}</td>
+                              <td>{{ each_record.May }}</td>
+                              <td>{{ each_record.Jun }}</td>
+                              <td>{{ each_record.Jul }}</td>
+                              <td>{{ each_record.Aug }}</td>
+                              <td>{{ each_record.Sep }}</td>
+                              <td>{{ each_record.Oct }}</td>
+                              <td>{{ each_record.Nov }}</td>
+                              <td>{{ each_record.Dec }}</td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+
+                      {% endfor %}
+                  {% else %}
+                      <h1>No Project</h1>
+                  {% endif %}
+                </div>
+            </div>
+          </div>
+        </div>
+{#  {% if list1 %}#}
+{#  {% for each in list1 %}#}
+{#      <table class="table">#}
+{#      <caption class="philips-blue">{{ team }} {{ each[0]["pro"] }} - {{ each[0]["year"] }}</caption>#}
+{#      <thead class="thead-light">#}
+{#        <tr>#}
+{#          <th scope="col">id</th>#}
+{#          <th scope="col">name</th>#}
+{#          <th scope="col">Jan</th>#}
+{#          <th scope="col">Feb</th>#}
+{#          <th scope="col">Mar</th>#}
+{#          <th scope="col">Apr</th>#}
+{#          <th scope="col">May</th>#}
+{#          <th scope="col">Jun</th>#}
+{#          <th scope="col">Jul</th>#}
+{#          <th scope="col">Aug</th>#}
+{#          <th scope="col">Sep</th>#}
+{#          <th scope="col">Oct</th>#}
+{#          <th scope="col">Nov</th>#}
+{#          <th scope="col">Dec</th>#}
+{#        </tr>#}
+{#      </thead>#}
+{#      <tbody>#}
+{#        {% for each_person in each%}#}
+{#        <tr>#}
+{#          <th scope="row">{{ each_person["id"]}}</th>#}
+{#          <th scope="row">{{ each_person["name"]}}</th>#}
+{#          <td>{{ each_person["Jan"] }}%</td>#}
+{#          <td>{{ each_person["Feb"] }}%</td>#}
+{#          <td>{{ each_person["Mar"] }}%</td>#}
+{#          <td>{{ each_person["Apr"] }}%</td>#}
+{#          <td>{{ each_person["May"] }}%</td>#}
+{#          <td>{{ each_person["Jun"] }}%</td>#}
+{#          <td>{{ each_person["Jul"] }}%</td>#}
+{#          <td>{{ each_person["Aug"] }}%</td>#}
+{#          <td>{{ each_person["Sep"] }}%</td>#}
+{#          <td>{{ each_person["Oct"] }}%</td>#}
+{#          <td>{{ each_person["Nov"] }}%</td>#}
+{#          <td>{{ each_person["Dec"] }}%</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#      </tbody>#}
+{#      </table>#}
+{#  {% endfor %}#}
+{#  {% else %}#}
+{#      <div style="font-size: 50px">&nbsp</div>#}
+{#      <div style="font-size: 50px;text-align: center">No projects.</div>#}
+{#  {% endif %}#}
+
+        <!-- [ Typography ] end -->
+      </div>
+      <!-- [ Main Content ] end -->
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+{% endblock content %}

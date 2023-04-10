@@ -21,6 +21,12 @@
             <span class="pc-mtext">Dashboard</span></a>
         </li>
 
+        <li class="pc-item">
+          <a href="{{ url_for('home_blueprint.index_demo') }}" class="pc-link">
+            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
+            <span class="pc-mtext">Personal Resource</span></a>
+        </li>
+
         <li class="pc-item pc-caption">
           <label>Pages</label>
           <i class="ti ti-news"></i>
@@ -35,8 +41,17 @@
 
         {# My Projects #}
         <li class="pc-item">
-          <a href="{{ url_for('user_blueprint.my_projects') }}" class="pc-link"><span class="pc-micon"><i
-                class="ti ti-briefcase"></i></span><span class="pc-mtext">My Projects</span></a>
+          <a href="#" class="pc-link">
+              <span class="pc-micon"><i class="ti ti-briefcase"></i></span>
+              <span class="pc-mtext">My Projects</span>
+              <span class="pc-arrow"><i class="ti ti-chevron-right"></i></span>
+          </a>
+          <ul class="pc-submenu">
+            {% if current_user.is_authenticated %}
+              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.involved_projects') }}">Involved Projects</a></li>
+              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.created_projects') }}">Created Projects</a></li>
+            {% endif %}
+          </ul>
         </li>
 
         {# My Team #}
@@ -47,13 +62,14 @@
 
         {# User Operations #}
         <li class="pc-item pc-hasmenu">
-          <a href="#!" class="pc-link"><span class="pc-micon"><i class="ti ti-leaf"></i></span><span
-              class="pc-mtext">User Operations</span><span class="pc-arrow"><i class="ti ti-chevron-right"></i></span></a>
+          <a href="#" class="pc-link">
+              <span class="pc-micon"><i class="ti ti-leaf"></i></span>
+              <span class="pc-mtext">User Operations</span>
+              <span class="pc-arrow"><i class="ti ti-chevron-right"></i></span>
+          </a>
           <ul class="pc-submenu">
 
             {% if current_user.is_authenticated %}
-              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.add_example_project') }}">Add Example Project</a></li>
-{#              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.join_example_project') }}">Join Example Project</a></li>#}
               <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.logout') }}">Logout</a></li>
             {% else %}
               <li class="pc-item"><a class="pc-link" href="{{ url_for('authentication_blueprint.login') }}">Login</a></li>
@@ -82,8 +98,8 @@
 {##}
         {# Tabler #}
         <li class="pc-item">
-          <a href="{{ url_for('home_blueprint.icon_tabler') }}" class="pc-link"><span class="pc-micon"><i
-                class="ti ti-plant-2"></i></span><span class="pc-mtext">Tabler</span><span class="pc-arrow"></a>
+          <a href="{{ url_for('home_blueprint.icon_tabler') }}" class="pc-link"><span class="pc-micon"><i class="ti ti-plant-2"></i></span>
+              <span class="pc-mtext">Tabler</span><span class="pc-arrow"></span></a>
         </li>
 
 {#        <li class="pc-item pc-caption">#}

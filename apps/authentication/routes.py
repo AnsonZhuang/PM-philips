@@ -37,8 +37,8 @@ def login():
             user = User.query.filter_by(email=email).first()
 
             # # Check Role and Team
-            # role = Role.query.filter_by(id=user.role_id).first()
-            # team = User.query.filter_by(id=user.team_id).first()
+            # role = Role.database.filter_by(id=user.role_id).first()
+            # team = User.database.filter_by(id=user.team_id).first()
 
             # Check the password
             if user and verify_pass(password, user.password):

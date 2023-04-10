@@ -164,34 +164,40 @@
           <i class="ti ti-settings"></i>
         </span>
       </a>
+
       <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
         <div class="dropdown-header">
-          <h4>Good Morning, <span class="small text-muted"> John Doe</span></h4>
-          <p class="text-muted">Project Admin</p>
-          <form class="header-search">
-            <i class="ti ti-search icon-search"></i>
-            <input type="search" class="form-control" placeholder="Search profile options" />
-          </form>
-          <hr />
+           <h4>Good Morning, {{ current_user.username }}</h4>
+{#          <h4>Good Morning, <span class="small text-muted"> John Doe</span></h4>#}
+          <p class="text-muted">{{ current_user.role.name|title }}</p>
+          {# Search #}
+{#          <form class="header-search">#}
+{#            <i class="ti ti-search icon-search"></i>#}
+{#            <input type="search" class="form-control" placeholder="Search profile options" />#}
+{#          </form>#}
+{#          <hr />#}
+
           <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 280px)">
-            <div class="upgradeplan-block bg-light-warning rounded">
-              <h4>Berry Bootstrap 5</h4>
-              <p class="text-muted">Open-Source Theme</p>
-              <a href="https://appseed.us/product/berry-dashboard/flask/" target="_blank"
-                class="btn btn-warning">Download</a>
-            </div>
-            <hr />
-            <div class="settings-block bg-light-primary rounded">
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                <label class="form-check-label" for="flexSwitchCheckDefault">Start DND Mode</label>
-              </div>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />
-                <label class="form-check-label" for="flexSwitchCheckChecked">Allow Notifications</label>
-              </div>
-            </div>
-            <hr />
+            {# Berry Bootstrap 5 #}
+{#            <div class="upgradeplan-block bg-light-warning rounded">#}
+{#              <h4>Berry Bootstrap 5</h4>#}
+{#              <p class="text-muted">Open-Source Theme</p>#}
+{#              <a href="https://appseed.us/product/berry-dashboard/flask/" target="_blank"#}
+{#                class="btn btn-warning">Download</a>#}
+{#            </div>#}
+{#            <hr />#}
+            {# On/Off #}
+{#            <div class="settings-block bg-light-primary rounded">#}
+{#              <div class="form-check form-switch">#}
+{#                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" />#}
+{#                <label class="form-check-label" for="flexSwitchCheckDefault">Start DND Mode</label>#}
+{#              </div>#}
+{#              <div class="form-check form-switch">#}
+{#                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked />#}
+{#                <label class="form-check-label" for="flexSwitchCheckChecked">Allow Notifications</label>#}
+{#              </div>#}
+{#            </div>#}
+{#            <hr />#}
             <a href="#" class="dropdown-item">
               <i class="ti ti-settings"></i>
               <span>Account Settings</span>
