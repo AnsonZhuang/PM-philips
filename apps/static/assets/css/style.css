@@ -14639,15 +14639,15 @@ pre[class*=language-] > code {
 
 .pc-sidebar {
   background: #fff;
-  width: 260px;
+  width: 200px;
   position: fixed;
-  top: 80px;
+  top: 60px;
   bottom: 0;
   z-index: 1026;
   overflow: hidden;
 }
 .pc-sidebar .navbar-wrapper {
-  width: 260px;
+  width: 200px;
   background: inherit;
 }
 .pc-sidebar ul {
@@ -14658,7 +14658,7 @@ pre[class*=language-] > code {
 .pc-sidebar .pc-caption {
   color: #212121;
   display: block;
-  padding: 24px 20px 10px !important;
+  padding: 20px 20px 10px !important;
   text-transform: capitalize;
   position: relative;
   font-size: 14px;
@@ -14705,10 +14705,10 @@ pre[class*=language-] > code {
 }
 .pc-sidebar .pc-link {
   display: block;
-  padding: 11px 20px;
+  padding: 8px 8px;
   color: #616161;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
 }
 .pc-sidebar .pc-link:active, .pc-sidebar .pc-link:focus, .pc-sidebar .pc-link:hover {
@@ -15446,8 +15446,8 @@ body {
 
 .pc-container {
   position: relative;
-  top: 80px;
-  margin-left: 260px;
+  top: 60px;
+  margin-left: 200px;
   margin-right: 20px;
   min-height: calc(100vh - 141px);
   background: #eceff1;

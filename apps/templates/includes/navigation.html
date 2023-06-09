@@ -1,52 +1,56 @@
 <!-- [ Header Topbar ] start -->
-<header class="pc-header">
-  <div class="m-header" style="padding-left: 15px; padding-top: 20px;">
+<style>
+    .pc
+
+</style>
+<header class="pc-header"; style="min-height: 60px">
+  <div class="m-header" style="padding-left: 15px; padding-top: 20px">
     <a href="/" class="pc-link">
       <!-- ========   change your logo hear   ============ -->
       <img src="{{ url_for('static', filename='assets/images/philips/philips-logo.png') }}" alt=""
-           class="logo logo-lg" height=65px/>
+           class="logo logo-lg" height=55px/>
     </a>
     <!-- ======= Menu collapse Icon ===== -->
-    <div class="pc-h-item">
+    <div class="pc-h-item" style="padding-right: 65px;">
       <a href="#" class="pc-head-link head-link-secondary m-0" id="sidebar-hide">
         <i class="ti ti-menu-2"></i>
       </a>
     </div>
   </div>
-  <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
-<div class="me-auto pc-mob-drp">
-  <ul class="list-unstyled">
-    <li class="pc-h-item header-mobile-collapse">
-      <a href="#" class="pc-head-link head-link-secondary ms-0" id="mobile-collapse">
-        <i class="ti ti-menu-2"></i>
-      </a>
-    </li>
-{# Search #}
-{#    <li class="dropdown pc-h-item d-inline-flex d-md-none">#}
-{#      <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#"#}
-{#        role="button" aria-haspopup="false" aria-expanded="false">#}
-{#        <i class="ti ti-search"></i>#}
-{#      </a>#}
-{#      <div class="dropdown-menu pc-h-dropdown drp-search">#}
-{#        <form class="px-3">#}
-{#          <div class="form-group mb-0 d-flex align-items-center">#}
-{#            <i class="ti ti-search"></i>#}
-{#            <input type="search" class="form-control border-0 shadow-none" placeholder="Search here..." />#}
-{#          </div>#}
-{#        </form>#}
-{#      </div>#}
-{#    </li>#}
-{#    <li class="pc-h-item d-none d-md-inline-flex">#}
-{#      <form class="header-search">#}
-{#        <i class="ti ti-search icon-search"></i>#}
-{#        <input type="search" class="form-control" placeholder="Search here..." />#}
-{#        <button class="btn btn-light-secondary btn-search"><i class="ti ti-adjustments-horizontal"></i></button>#}
-{#      </form>#}
-{#    </li>#}
-  </ul>
-</div>
+  <div class="header-wrapper"; style="height: 60px"> <!-- [Mobile Media Block] start -->
+    <div class="me-auto pc-mob-drp">
+      <ul class="list-unstyled">
+        <li class="pc-h-item header-mobile-collapse">
+          <a href="#" class="pc-head-link head-link-secondary ms-0" id="mobile-collapse">
+            <i class="ti ti-menu-2"></i>
+          </a>
+        </li>
+    {# Search #}
+    {#    <li class="dropdown pc-h-item d-inline-flex d-md-none">#}
+    {#      <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#"#}
+    {#        role="button" aria-haspopup="false" aria-expanded="false">#}
+    {#        <i class="ti ti-search"></i>#}
+    {#      </a>#}
+    {#      <div class="dropdown-menu pc-h-dropdown drp-search">#}
+    {#        <form class="px-3">#}
+    {#          <div class="form-group mb-0 d-flex align-items-center">#}
+    {#            <i class="ti ti-search"></i>#}
+    {#            <input type="search" class="form-control border-0 shadow-none" placeholder="Search here..." />#}
+    {#          </div>#}
+    {#        </form>#}
+    {#      </div>#}
+    {#    </li>#}
+    {#    <li class="pc-h-item d-none d-md-inline-flex">#}
+    {#      <form class="header-search">#}
+    {#        <i class="ti ti-search icon-search"></i>#}
+    {#        <input type="search" class="form-control" placeholder="Search here..." />#}
+    {#        <button class="btn btn-light-secondary btn-search"><i class="ti ti-adjustments-horizontal"></i></button>#}
+    {#      </form>#}
+    {#    </li>#}
+      </ul>
+    </div>
 <!-- [Mobile Media Block end] -->
-<div class="ms-auto">
+    <div class="ms-auto"; style="height: 60px">
   <ul class="list-unstyled">
 
     <li class="pc-h-item">
@@ -58,7 +62,7 @@
 
     {# Notification #}
 {#    <li class="dropdown pc-h-item">#}
-{#      <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"#}
+{#      <a class="pc-head-link head-link-seconda.+ry dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"#}
 {#        role="button" aria-haspopup="false" aria-expanded="false">#}
 {#        <i class="ti ti-bell"></i>#}
 {#      </a>#}
@@ -220,6 +224,6 @@
     </li>
   </ul>
 </div>
- </div>
+  </div>
 </header>
 <!-- [ Header ] end -->

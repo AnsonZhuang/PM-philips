@@ -1,10 +1,10 @@
 <!-- [ Sidebar Menu ] start -->
 <nav class="pc-sidebar">
   <div class="navbar-wrapper">
-    <div class="m-header" style="padding-left: 15px; padding-top: 20px;">
+    <div class="m-header" style="padding-left: 15px; padding-top: 20px; height: 60px">
       <a href="index.html" class="b-brand">
         <!-- ========   Change your logo from here   ============ -->
-        <img src="{{ url_for('static', filename='assets/images/philips/philips-logo.png') }}" alt="" class="logo logo-lg" height=65px/>
+        <img src="{{ url_for('static', filename='assets/images/philips/philips-logo.png') }}" alt="" class="logo logo-lg" height=55px/>
       </a>
     </div>
     <div class="navbar-content">
@@ -21,12 +21,6 @@
             <span class="pc-mtext">Dashboard</span></a>
         </li>
 
-        <li class="pc-item">
-          <a href="{{ url_for('home_blueprint.index_demo') }}" class="pc-link">
-            <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
-            <span class="pc-mtext">Personal Resource</span></a>
-        </li>
-
         <li class="pc-item pc-caption">
           <label>Pages</label>
           <i class="ti ti-news"></i>
@@ -39,26 +33,34 @@
                 class="ti ti-user"></i></span><span class="pc-mtext">Personal Info</span></a>
         </li>
 
-        {# My Projects #}
+{##}
+        {# My Team #}
+{#        <li class="pc-item">#}
+{#          <a href="{{ url_for('user_blueprint.my_team') }}" class="pc-link"><span class="pc-micon"><i#}
+{#                class="ti ti-users"></i></span><span class="pc-mtext">My Team</span></a>#}
+{#        </li>#}
+
+        {# Project List #}
         <li class="pc-item">
-          <a href="#" class="pc-link">
-              <span class="pc-micon"><i class="ti ti-briefcase"></i></span>
-              <span class="pc-mtext">My Projects</span>
-              <span class="pc-arrow"><i class="ti ti-chevron-right"></i></span>
-          </a>
-          <ul class="pc-submenu">
-            {% if current_user.is_authenticated %}
-              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.involved_projects') }}">Involved Projects</a></li>
-              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.created_projects') }}">Created Projects</a></li>
-            {% endif %}
-          </ul>
+          <a href="{{ url_for('home_blueprint.project_list') }}" class="pc-link"><span class="pc-micon"><i
+                class="ti ti-briefcase"></i></span><span class="pc-mtext">Project List</span></a>
         </li>
 
-        {# My Team #}
-        <li class="pc-item">
-          <a href="{{ url_for('user_blueprint.my_team') }}" class="pc-link"><span class="pc-micon"><i
-                class="ti ti-users"></i></span><span class="pc-mtext">My Team</span></a>
-        </li>
+        {# My Projects #}
+{#        <li class="pc-item">#}
+{#          <a href="#" class="pc-link">#}
+{#              <span class="pc-micon"><i class="ti ti-briefcase"></i></span>#}
+{#              <span class="pc-mtext">My Projects</span>#}
+{#              <span class="pc-arrow"><i class="ti ti-chevron-right"></i></span>#}
+{#          </a>#}
+{#          <ul class="pc-submenu">#}
+{#            {% if current_user.is_authenticated %}#}
+{#              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.involved_projects') }}">Involved Projects</a></li>#}
+{#              <li class="pc-item"><a class="pc-link" href="{{ url_for('user_blueprint.created_projects') }}">Created Projects</a></li>#}
+{#            {% endif %}#}
+{#          </ul>#}
+{#        </li>#}
+
 
         {# User Operations #}
         <li class="pc-item pc-hasmenu">

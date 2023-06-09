@@ -426,7 +426,7 @@ File: style.css
   background: rgba(33, 150, 243, 0.2);
 }
 
-[data-pc-theme=dark][data-pc-preset=preset-1] .pc-sidebar .pc-navbar > .pc-item.active > .pc-link, [data-pc-theme=dark][data-pc-preset=preset-1] .pc-sidebar .pc-navbar > .pc-item:focus > .pc-link, [data-pc-theme=dark][data-pc-preset=preset-1] .pc-sidebar .pc-navbar > .pc-item:hover > .pc-link {
+[data-pc-theme=dark][data-pc-preset=preset-1] .pc-sidebar .pc-navbar > .pc-item.active > .pc-link, [data-pc-theme=dark][data-pc-preset=preset-1] .pc-sidebar .pc-navbar > .pc-item:focus > .pc-link, [data-pc-theme=dark][data-pc-preset=preset-1] .pc- .pc-navbar > .pc-item:hover > .pc-link {
   background: rgba(103, 58, 183, 0.2);
 }
 

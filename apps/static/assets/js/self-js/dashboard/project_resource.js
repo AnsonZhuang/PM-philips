@@ -16,7 +16,7 @@ function floatchart() {
                 text: "Personal Resource in " + chart_year,
                 subtext: chart_username,
                 left: "center",
-                top: 'top',
+                // top: '0% ',
                 textStyle: {
                     fontSize: 20
                 },
@@ -25,42 +25,54 @@ function floatchart() {
                 }
             },
             legend: {
-                top: '12%',
+                top: '15%',
             },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    type: 'shadow'
+                    // Use axis to trigger tooltip
+                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
                 }
             },
             grid: {
-                top: '16%',
-                left: '13%',
+                top: '25%',
+                left: '20%',
                 right: '2%',
                 bottom: '5%',
                 containLabel: false
             },
             textStyle: {
-                color: 'black'
+                color: 'black',
+                fontSize: 10
             },
             xAxis: {},
-            yAxis: {type: 'category'},
+            yAxis: {
+                type: 'category',
+                // max: 10
+            },
             dataset: chart_dataframe,
+            // ['Project', 'Jan', ……, 'Dec']
+            // ['A', '10', ……, '50']
+            // ['B', '10', ……, '50']
+            // ['C', '10', ……, '50']
             color: ['#3C1361', '#5E2D79', '#7B4F8E', '#986EA3',
                 '#B18FCF', '#C9B9E8', '#D7D2EE', '#BDD8EA',
                 '#A2C8EC', '#7FA3D1', '#5E7FA2', '#3C5F73'],
             series: Array(12).fill(
                 {
                     type: 'bar',
+                    interval:' 10%',
                     stack: 'total',
                     // seriesLayoutBy: 'row',
                     label: {show: true},
-                    // barWidth: '100%',
+                    barGap: '0%',
+                    // barCategoryGap: '0%',
                     emphasis: {
                         focus: 'series'
                     }
                 }
             ),
+
         };
 
         // 使用刚指定的配置项和数据显示图表。
@@ -123,7 +135,7 @@ function floatchart() {
                         }
                     ),
                 };
-                myChart.setOption(new_option, true)
+                myChart.setOption(new_option,true)
             } else if (selectedValue === 'Projects for each month') {
                 var new_option = {
                     notMerge: true,
@@ -175,7 +187,7 @@ function floatchart() {
                         }
                     ),
                 };
-                myChart.setOption(new_option, true)
+                myChart.setOption(new_option,true)
             }
         });
 

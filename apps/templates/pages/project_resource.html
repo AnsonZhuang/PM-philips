@@ -3,7 +3,7 @@
 {% block title %} Dashboard {% endblock title %}
 {% block content %}
 <script>
-    // e.g. 'chart'
+    // e.g. single project all member
     var chart_username = "{{ datadict['username'] }}";
     var chart_year = "{{ datadict['year'] }}";
     var chart_dataframe = {{ dataset['dataframe']|tojson }};
@@ -50,6 +50,6 @@
   </script>
   <!-- Apex Chart -->
   <script src="{{ url_for('static', filename='assets/js/plugins/echarts.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/js/self-js/dashboard/dashboard_demo.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/self-js/dashboard/project_resource.js') }}"></script>
   <!-- [Page Specific JS] end -->
 {% endblock extra_js %}

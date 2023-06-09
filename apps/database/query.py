@@ -1,13 +1,58 @@
 from apps import db
-from apps.authentication.models import User, Project, Team, Role, Resource, UserToProject
+from apps.authentication.models import User, Project, ProjectProduct, Team, Role, Resource, UserToProject, \
+    ProjectProduct, ProjectPriority, ProjectStatus
 from flask_login import login_required, current_user
 
 
+# ------------------------------Chart Start------------------------------ #
+
 # ------------------------------Basic------------------------------ #
+# return a User
+def query_user_by_id(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    return user
+
+
+# return a list of User(s)
+def query_users_by_ids(*user_ids):
+    users = [User.query.filter_by(id=each_user_id) for each_user_id in user_ids]
+    return users
+
+
+def query_product_by_id(product_id):
+    product = ProjectProduct.query.filter_by(id=product_id).first()
+    return product
+
+
+
+def query_priority_by_id(priority_id):
+    priority = ProjectPriority.query.filter_by(id=priority_id).first()
+    return priority
+
+
+def query_status_by_id(status_id):
+    status = ProjectStatus.query.filter_by(id=status_id).first()
+    return status
+
 
 # ------------------------------Basic End------------------------------ #
 
 # ------------------------------Project------------------------------ #
+# return a Project
+def query_project_by_id(project_id):
+    project = Project.query.filter_by(id=project_id).first()
+    return project
+
+
+# return a list of Project(s)
+def query_projects_by_ids(*project_ids):
+    projects = [Project.query.filter_by(id=each_project_id) for each_project_id in project_ids]
+
+
+# return a list of Project(s)
+def query_projects_all():
+    projects = Project.query.all()
+    return projects
 
 # return a list of Project(s)
 @login_required
@@ -25,11 +70,19 @@ def query_created_projects_by_user(user_id):
     return created_projects
 
 
+# project list - prepare all project instances - with page params
+# 用于分页返回Project列表结果
+@login_required
+def get_all_project_by_page(page, per_page):
+    query = Project.query
+    page_of_projects = query.paginate(page=page, per_page=per_page).items
+    return page_of_projects
+
+
 # ------------------------------Project End------------------------------ #
 
-
 # ------------------------------Resource------------------------------ #
-
+# Resource的1/2/3参数版本
 # return a list of Resource record(s)
 @login_required
 def query_resource_by_user(user_id):
@@ -72,7 +125,7 @@ def query_resource_by_project_year(project_id, year):
     return resource_record
 
 
-#  return a Resource record
+#  return a Resource record (ONLY ONE)
 def query_resource_by_user_project_year(user_id, project_id, year):
     resource = Resource.query.filter_by(user_id=user_id, project_id=project_id, year=year).first()
     return resource
@@ -81,58 +134,16 @@ def query_resource_by_user_project_year(user_id, project_id, year):
 # ------------------------------Resource End------------------------------ #
 
 # ------------------------------Chart End------------------------------ #
+
+# ------------------------------NEW START------------------------------ #
+# return list of dict = project_dict {"name": …, "data": [5, 10, ……(12 in total)]}
+# View 1.1 单用户-指定年份12月-所有项目
 @login_required
-def prepare_resource_table_data_user(user_id):
-    # 1 project_list[project_dict_1, project_dict_2, project_dict_3]
-    # 2 project_dict{"name": …, "record_list": [record1, record_2, record_3]}
-    # 3 cur_record{"year":…, "Jan":…, ………}
-
-    # 1 project_list[project_dict_1, project_dict_2, project_dict_3]
-    project_list = []
-    projects = query_projects_by_user(user_id)
-    for each in projects:
-        # 2 project_dict{"name": ……, "record_list": [record1, record_2, record_3]}
-        project_name = each.name
-        record_list = []
-        records = query_resource_by_user_project(user_id, each.id)
-        for each in records:
-            # 3
-            # project_name = Project.query.filter_by(id=each.project_id).first().name
-            # username = User.query.filter_by(id=each.user_id).first().username
-            # resource_record = query_resource_record_user_project(user_id, each)
-            cur_record = {
-                # "user": username
-                # "project": project_name,
-                "year": each.year,
-                "Jan": each.Jan,
-                "Feb": each.Feb,
-                "Mar": each.Mar,
-                "Apr": each.Apr,
-                "May": each.May,
-                "Jun": each.Jun,
-                "Jul": each.Jul,
-                "Aug": each.Aug,
-                "Sep": each.Sep,
-                "Oct": each.Oct,
-                "Nov": each.Nov,
-                "Dec": each.Dec
-            }
-            record_list.append(cur_record)
-        project_dict = {'name': project_name,
-                        'data': record_list}
-        project_list.append(project_dict)
-    resource_data = project_list
-    return resource_data
-
-
-# return list of dict
-# 1 user_year_resources [project_dict_1, project_dict_2, project_dict_3]
-# 2 project_dict {"name": …, "data": [5, 10, ……(12 in total)]}
-# 3 data [5, 10, ……(12 in total)]
-@login_required
-def query_resource_by_user_year_2(user_id, year):
+def prepare_resource_by_user_year(user_id, year):
     user_year_resources = []
+    # 1 用户的所有项目
     user_projects = query_projects_by_user(user_id)
+    # 2 对于每个项目的各个月份
     for each in user_projects:
         record = query_resource_by_user_project_year(user_id, each.id, year)
         project_dict = {'name': each.name,
@@ -144,56 +155,7 @@ def query_resource_by_user_year_2(user_id, year):
     return chart_data
 
 
-# return list of dict
-# e.g. [{'name': 'Rubicon 2.0', 'data': 15}, {'name': 'Intrepid NMPA', 'data': 20}]
+# 返回Project对象总数
 @login_required
-def query_resource_by_user_month(user_id, year, month):
-    personal_resource_this_year = query_resource_by_user_year_2(user_id, year)
-    for each in personal_resource_this_year:
-        # Use the data of the specific month to replace the list of the data of all months
-        each["data"] = each["data"][month - 1]
-    personal_resource_this_month = sorted(personal_resource_this_year, key=lambda x: x['data'], reverse=True)
-    return personal_resource_this_month
-
-
-# return list of list, sorted by value in descending order
-# e.g. [['Intrepid NMPA', 'Rubicon 2.0'], [20, 15]]
-@login_required
-def query_resource_by_user_month_list(user_id, year, month):
-    personal_resource_this_month = query_resource_by_user_month(user_id, year, month)
-    # ['Intrepid NMPA', 'Rubicon 2.0']
-    name_list = [each['name'] for each in personal_resource_this_month]
-    # [20, 15]
-    data_list = [each['data'] for each in personal_resource_this_month]
-    personal_resource_this_month_list = [name_list, data_list]
-    return personal_resource_this_month_list
-
-
-# return int
-@login_required
-def query_total_resource_by_user_month(user_id, year, month):
-    user_resource_month = query_resource_by_user_month(user_id, year, month)
-    total_resource_month = 0
-    for each in user_resource_month:
-        total_resource_month = total_resource_month + each['data']
-    return total_resource_month
-
-
-# return ECharts Dataset
-# e.g.
-# dataset: {
-#     source: [
-#       ['product', '2015', '2016', '2017'],
-#       ['Matcha Latte', 43.3, 85.8, 93.7],
-#       ['Milk Tea', 83.1, 73.4, 55.1],
-#       ['Cheese Cocoa', 86.4, 65.2, 82.5],
-#       ['Walnut Brownie', 72.4, 53.9, 39.1]
-#     ]
-#   }
-# @login_required
-# def prepare_resource_dataset_by_user_year(user_id, year):
-#     user_resource_month = query_resource_by_user_month(user_id, year)
-#     total_resource_month = 0
-#     for each in user_resource_month:
-#         total_resource_month = total_resource_month + each['data']
-#     return total_resource_month
+def get_all_projects_count():
+    return Project.query.count()

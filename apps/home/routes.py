@@ -4,51 +4,148 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from apps.home import blueprint
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from jinja2 import TemplateNotFound
-from apps.database.query import query_total_resource_by_user_month, query_resource_by_user_year_2, \
-    query_resource_by_user_month_list
-from apps.database.prepare_dataset import prepare_resource_by_user_year
+from apps.database.query import query_user_by_id, get_all_projects_count, query_project_by_id
+from apps.database.prepare_dataset import prepare_user_year_resource_chart, prepare_project_year_resource_chart, \
+    prepare_allProjectListByPage_Table
 from datetime import date
 
+
+# ============================= My Functions Start =============================
 
 @blueprint.route('/index')
 @login_required
 def index():
-    cur_date = date.today()
-    cur_year = cur_date.year
-    cur_month = cur_date.month
-    cur_day = cur_date.day
+    user_id = 320221138
+    year = 2023
 
-    # personal_resource_this_year[project_dict_1, project_dict_2, project_dict_3]
-    # project_dict{"name": abc, "data": [5, 10, ……(12 in total)]}
-    # data[5, 10, ……(12 in total)]
-    personal_resource_this_year = query_resource_by_user_year_2(current_user.id, cur_year)
+    dataset = prepare_user_year_resource_chart(user_id, year)
+    username = query_user_by_id(user_id).username
 
-    # The user resource to each project this month in lists
-    # e.g. [['Intrepid NMPA', 'Rubicon 2.0'], [20, 15]]
-    personal_resource_this_month = query_resource_by_user_month_list(current_user.id, cur_year, cur_month)
-    personal_resource_this_month = {'labels': personal_resource_this_month[0],
-                                    'series': personal_resource_this_month[1]}
+    datadict = {
+        'user_id': user_id,
+        'username': username,
+        'year': year
+    }
 
-    # All user resource to projects this month
-    total_personal_resource_this_month = query_total_resource_by_user_month(current_user.id, cur_year, cur_month)
+    # Pass a parameter as the reference for the width/height
+    # of the <div> label containing the chart depending on
+    # the number of the item
+    return render_template('pages/index_demo.html', dataset=dataset, datadict=datadict)
 
-    return render_template('pages/index.html', segment='index',
-                           personal_resource_this_year=personal_resource_this_year,
-                           personal_resource_this_month=personal_resource_this_month,
-                           total_personal_resource_this_month=total_personal_resource_this_month)
-    # total_personal_resource_this_month=temp_dict)
-
-
-@blueprint.route('/index_demo')
+@blueprint.route('/project_list')
 @login_required
-def index_demo():
-    dataset = prepare_resource_by_user_year(320221138, 2023)
-    print(dataset)
-    return render_template('pages/index_demo.html', dataset=dataset)
+def project_list():
+    search_str = request.args.get('search_str', 'default', type=str)
+    # 显示全部
+    if search_str == 'default':
+        # 当前选中页面
+        page = request.args.get('page', 1, type=int)
+        # 10 results per page
+        per_page = 10
+        # table每行n等分
+        n_fold = 1
+        # 得到结果总数用于计算页数
+        total_rows = get_all_projects_count()
+        total_pages = total_rows // per_page + 1
+        # 显示全部
+        dataset = prepare_allProjectListByPage_Table(page, per_page)
 
+        # row = [project_id, project_name, product, priority, pm_id, pm, status]
+        datalabel = dataset['dataframe']['source'][0]
+        dataframe = dataset['dataframe']['source'][1:]
+
+        # 每页显示的数据量
+        # 根据当前页和每页显示的数据量进行切割
+        data_slice = dataframe
+
+        return render_template('my_pages/project_list.html', project_label=datalabel,
+                               project_list=data_slice, page=page, total_pages=total_pages, n_fold=n_fold,
+                               search_str=search_str)
+    # TODO Search for projects with keywords
+    # else:
+    #     # 当前选中页面
+    #     page = request.args.get('page', 1, type=int)
+    #     per_page = 2
+    #     # table每行n等分
+    #     n_fold = 1
+    #     # 得到结果总数用于计算页数
+    #     total_rows = get_search_projects_count(search_str)
+    #     total_pages = total_rows // per_page + 1
+    #     # 显示全部
+    #     dataset = prepare_searchProjectListByPage_Table(search_str, page, per_page)
+    #
+    #     datalabel = dataset['dataframe']['source'][0]
+    #     dataframe = dataset['dataframe']['source'][1:]
+    #
+    #     # 每页显示的数据量
+    #     # 根据当前页和每页显示的数据量进行切割
+    #     data_slice = dataframe
+    #
+    #     return render_template('pages/project_list.html', car_model_label=datalabel,
+    #                            car_model_list=data_slice, page=page, total_pages=total_pages, n_fold=n_fold,
+    #                            search_str=search_str)
+    #
+
+@blueprint.route('/project_resource_page')
+@login_required
+def project_resource_page():
+    id = request.args.get('id', -1, type=int)
+    if id == -1:
+        return redirect(url_for("home_blueprint.project_list"))
+    else:
+        # TODO Render serveral charts to display information of the chosen project
+        project_id = id
+        year = 2023
+        dataset = prepare_project_year_resource_chart(project_id, year)
+        project_name = query_project_by_id(project_id).name
+
+        datadict = {
+            'project_id': project_id,
+            'project_name': project_name,
+            'year': year
+        }
+        selection_text = {
+            "member_months_bar": "Each Member-Months(Bar)",
+            "member_months_pie": "Each Member-Months(Pie)",
+            "month_members_bar": "Each Month-Members(Bar)",
+            "month_members_pie": "Each Month-Members(Pie)",
+        }
+
+        # Pass a parameter as the reference for the width/height
+        # of the <div> label containing the chart depending on
+        # the number of the item
+        return render_template('my_pages/project_resource_page.html', dataset=dataset, datadict=datadict,
+                               selection_text=selection_text)
+
+@blueprint.route('/user_resource_page')
+@login_required
+def user_resource_page():
+    id = request.args.get('id', -1, type=int)
+    if id == -1:
+        # TODO 后续用用户列表取代
+        return redirect(url_for("home_blueprint.project_list"))
+    else:
+        # TODO Render serveral charts to display information of the chosen user
+        user_id = id
+        year = 2023
+        dataset = prepare_user_year_resource_chart(user_id, year)
+        username = query_user_by_id(user_id).username
+        print(dataset)
+        datadict = {
+            'user_id': user_id,
+            'username': username,
+            'year': year
+        }
+
+        # Pass a parameter as the reference for the width/height
+        # of the <div> label containing the chart depending on
+        # the number of the item
+        return render_template('my_pages/user_resource_page.html', dataset=dataset, datadict=datadict)
+
+# ============================= My Functions End =============================
 
 @blueprint.route('/typography')
 @login_required
@@ -60,7 +157,6 @@ def typography():
 @login_required
 def color():
     return render_template('pages/color.html')
-
 
 @blueprint.route('/icon-tabler')
 @login_required
@@ -138,72 +234,3 @@ def get_segment(request):
 
     except:
         return None
-
-# 在 Flask 中，你可以使用 Flask 的模板引擎来从 MySQL 数据库中获取数据，并将其渲染到 HTML 模板中，然后将数据作为 JavaScript 对象传递给你的 JS 文件。下面是一些基本步骤来完成这个任务：
-#
-# 从 MySQL 数据库中获取数据
-# 使用 Flask 框架中的 SQLAlchemy 模块来连接到 MySQL 数据库，并编写查询语句从数据库中获取数据。例如：
-# python
-# Copy code
-# from flask import Flask, render_template
-# from flask_sqlalchemy import SQLAlchemy
-#
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://user:password@localhost/db_name'
-# db = SQLAlchemy(app)
-#
-# class Data(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(50))
-#     value = db.Column(db.Integer)
-#
-# @app.route('/')
-# def index():
-#     data = Data.database.all()
-#     return render_template('index.html', data=data)
-#
-#
-# 渲染数据到 HTML 模板中
-# 在 index() 函数中，我们将查询到的数据 data 传递给了模板引擎 render_template()。在 HTML 模板中，我们可以使用 Flask 的模板引擎语法将数据渲染到页面上，例如：
-# html
-# Copy code
-# <div id="chart"></div>
-#
-# <script>
-# var data = [
-#     {% for item in data %}
-#     {name: "{{ item.name }}", value: {{ item.value }}},
-#     {% endfor %}
-# ];
-# </script>
-# 这里我们将数据渲染到了一个 JavaScript 变量 data 中，该变量是一个包含多个对象的数组。每个对象都包含两个属性，即 name 和 value。
-#
-# 使用渲染后的数据更新图表
-# 在 JS 文件中，你可以使用 data 变量来更新你的图表。例如，如果你正在使用 Chart.js 来绘制图表，可以这样做：
-# javascript
-# Copy code
-# var ctx = document.getElementById('chart').getContext('2d');
-# var chart = new Chart(ctx, {
-#     type: 'bar',
-#     data: {
-#         labels: data.map(function(item) { return item.name }),
-#         datasets: [{
-#             label: 'My Dataset',
-#             data: data.map(function(item) { return item.value }),
-#             backgroundColor: 'rgba(255, 99, 132, 0.2)',
-#             borderColor: 'rgba(255, 99, 132, 1)',
-#             borderWidth: 1
-#         }]
-#     },
-#     options: {
-#         scales: {
-#             y: {
-#                 beginAtZero: true
-#             }
-#         }
-#     }
-# });
-# 在这里，我们使用了 data 变量来设置图表的标签和数据。map() 方法将数据从包含对象的数组转换为包含值的数组。你可以根据需要调整这里的代码，以适应你自己的图表库。
-#
-# 总之，从 MySQL 数据库中获取数据，渲染到 HTML 模板中，再将数据传递给 JS 文件并使用它来更新图表是一种常见的方法，可以满足你的需求。
-#

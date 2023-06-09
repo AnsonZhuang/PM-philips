@@ -177,9 +177,9 @@ class Project(db.Model):
                              back_populates="projects")
     # ==========项目具体信息==========
     # 项目具体内容
-    description = db.Column(db.VARCHAR(500), nullable=True)
+    scope = db.Column(db.VARCHAR(500), nullable=True)
     # 项目具体计划
-    plan = db.Column(db.VARCHAR(500), nullable=True)
+    rfd = db.Column(db.VARCHAR(500), nullable=True)
     # ==========非数据库字段 仅反向引用属性==========
     # multi Project - multi User
     users = db.relationship('User', secondary=UserToProject, back_populates='involved_projects')

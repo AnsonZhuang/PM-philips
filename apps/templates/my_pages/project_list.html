@@ -1,0 +1,164 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Project List {% endblock title %}
+
+{% block extrastyle %}
+
+
+{% endblock extrastyle %}
+
+<style>
+  caption{
+      font-size: 30px;
+      color: black;
+      text-align: center;
+      caption-side: top;
+  }
+  table{
+      margin: auto;
+  }
+  .team-btn:focus{
+      background-color: #0b5ed7;
+      outline: none;
+      box-shadow: none;
+  }
+  {# 强制更改部门选项按钮被点击时的变化颜色并删除阴影 #}
+  .team-btn:active{
+      background-color: #063a8c !important;
+      outline: none !important;
+      box-shadow: none !important;
+  }
+  .team-btn:hover{
+      background-color: #0b5ed7;
+  }
+  .team-bar-container {
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-bottom: 10px;
+  }
+</style>
+
+{% block content %}
+<script>
+
+</script>
+  <!-- [ Main Content ] start -->
+  <div class="pc-container">
+    <div class="pc-content">
+      <!-- [ breadcrumb ] start -->
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <div class="page-header-title">
+                <h5 class="m-b-10">List Pages</h5>
+              </div>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">List Pages</a></li>
+                <li class="breadcrumb-item" aria-current="page">Projects</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ breadcrumb ] end -->
+
+
+
+
+      <!-- [ Main Content ] start -->
+      <div class="row">
+        <!-- [ Typography ] start -->
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h2>Project List</h2>
+            </div>
+            <div class="card-body">
+{#               P1.2 搜索框#}
+              <div class="row" style="margin-bottom: 20px;">
+                <div class="col-xl-3"></div>
+                <div class="col-xl-6">
+                <form method="GET" action="" class="d-flex">
+                  <input name="search_str" class="form-control me-2" type="search" placeholder="Search for Project" aria-label="Search">
+                  <button id="car-model-compare-btn" class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                </div>
+                <div class="col-xl-3"></div>
+              </div>
+{#               P2 静态呈现的table#}
+              <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  {% for i in range(n_fold) %}
+                    {% for each in project_label %}
+                      <th scope="col" style="min-width: auto;white-space: nowrap;">{{ each }}</th>
+                    {% endfor %}
+                  {% endfor %}
+                </tr>
+              </thead>
+                <tbody>
+                {% for row_batch in project_list|batch(n_fold) %}
+                  <tr>
+                  {% for each_row in row_batch %}
+                      <th scope="row">{{ each_row[0] }}</th>
+                      <td><a href="{{ url_for("home_blueprint.project_resource_page") }}?id={{ each_row[0] }}">{{ each_row[1] }}</a></td>
+                      <td>{{ each_row[2] }}</td>
+                      <td>{{ each_row[3] }}</td>
+                      {# 如果是TBD 则该column不设置超链接 #}
+                      {% if each_row[5]=="TBD" %}
+                        <td>{{ each_row[5] }}</td>
+                      {% else %}
+                        <td><a href="{{ url_for("home_blueprint.user_resource_page") }}?id={{ each_row[4] }}">{{ each_row[5] }}</a></td>
+                      {% endif %}
+                      <td>{{ each_row[6] }}</td>
+{#                    {% for each_col in each_row %}#}
+{#                        <td>{{ each_col }}</td>#}
+{##}
+{#                    {% endfor %}#}
+                  {% endfor %}
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+                {# P3 翻页器 #}
+              <div class="row" style="display: flex;">
+{#                <div class="col-xl-3"></div>#}
+                  <div class="pagination" style="justify-content: center;align-items: center;">
+                    {% if page > 1 %}
+                      <li class="page-item"> <a class="page-link" href="?page={{ page-1 }}&search_str={{ search_str }}">Last</a></li>
+                    {% endif %}
+                    {% for num in range(1, total_pages+1) %}
+                      {% if num == page %}
+                        <li class="page-item active"> <a class="page-link" >{{ num }}</a></li>
+                      {% elif num >= page - 10 and num <= page + 10 %}
+                        <li class="page-item "> <a class="page-link" href="?page={{ num }}&search_str={{ search_str }}">{{ num }}</a></li>
+                      {% elif num == 1 or num == total_pages-1 %}
+                        <li class="page-item "> <a class="page-link" href="?page={{ num }}&search_str={{ search_str }}">{{ num }}</a></li>
+                      {% elif num == page - 11 or num == page + 11 %}
+                        <li class="page-item disabled"> <a class="page-link">...</a></li>
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if page < total_pages %}
+                      <li class="page-item"> <a class="page-link" href="?page={{ page+1 }}&search_str={{ search_str }}">Next</a></li>
+                    {% endif %}
+                  </div>
+{#                <div class="col-xl-3"></div>#}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- [ Typography ] end -->
+      </div>
+      <!-- [ Main Content ] end -->
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+
+
+{% endblock content %}
+{% block extra_js %}
+{% endblock extra_js %}
+

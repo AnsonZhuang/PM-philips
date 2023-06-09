@@ -1,0 +1,118 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Project Resource Page {% endblock title %}
+{% block content %}
+  <script>
+      // e.g. 'chart'
+      var chart_project_name = "{{ datadict['project_name'] }}";
+      var chart_year = "{{ datadict['year'] }}";
+      var chart_dataframe = {{ dataset['dataframe']|tojson }};
+      var chart_row_cnt = {{ dataset['size'][0] }};
+      var chart_col_cnt = {{ dataset['size'][1] }};
+      console.log(chart_row_cnt);
+      console.log(chart_col_cnt);
+  </script>
+  <div class="pc-container">
+    <div class="pc-content">
+      <!-- 相对路径 start -->
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <div class="page-header-title">
+                <h5 class="m-b-10">List Pages</h5>
+              </div>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">List Pages</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{{ url_for("home_blueprint.project_list") }}">Projects</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">Project Page</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 相对路径 end -->
+
+      <!-- [ Main Content ] start -->
+      <div class="row">
+        <!-- [ Typography ] start -->
+        <div class="col-sm-12">
+
+          <!-- First Card start -->
+          <!-- Basic Info with Nav-->
+
+          <div class="card text-center">
+            <div class="card-header">
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">A</div>
+                  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">B</div>
+                  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">C</div>
+              </div>
+            </div>
+          </div>
+          <!-- First Card End -->
+
+          <!-- Second Card start -->
+          <!-- Chart -->
+          <div class="card">
+            <div class="card-header" style="padding-bottom: 10px;">
+              <h3>{{ datadict['project_name'] }}</h3>
+            </div>
+            <div class="card-body" style="padding-bottom:40px;">
+
+              {#              <div id="chart" style="width: 70%"></div>#}
+              <div style="width: 100%;display: flex; margin-bottom: 20px">
+                <div style="width: 100%;height: 100%">
+                  <div class="row mb-3 align-items-center">
+                    <div class="col-auto">
+                      <select id="chart-selector" class="form-select p-r-35">
+                        <option selected>Months(bar)</option>
+                        <option>Months(pie)</option>
+                        <option>Members(bar)</option>
+                        <option>Members(pie)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div id="chart" style="height: 100%;width: 100%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Second Card end -->
+        </div>
+
+
+        {#        <!-- [ sample-page ] end -->#}
+      </div>
+      <!-- [ Main Content ] end -->
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block extra_js %}
+  <script>
+      {# Set the chart container size #}
+      document.getElementById('chart').style.height = (chart_row_cnt * 55 + 120).toString().concat("px");
+
+  </script>
+  <!-- Apex Chart -->
+  <script src="{{ url_for('static', filename='assets/js/plugins/echarts.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/self-js/dashboard/project_resource_page.js') }}"></script>
+  <!-- [Page Specific JS] end -->
+{% endblock extra_js %}

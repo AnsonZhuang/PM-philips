@@ -6,111 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 function floatchart() {
 
-  // //  function 1
-  // (function () {
-  //   var options = {
-  //     chart: {
-  //       type: 'line',
-  //       height: 90,
-  //       sparkline: {
-  //         enabled: true
-  //       }
-  //     },
-  //     dataLabels: {
-  //       enabled: false
-  //     },
-  //     colors: ['#FFF'],
-  //     stroke: {
-  //       curve: 'smooth',
-  //       width: 3
-  //     },
-  //     series: [
-  //       {
-  //         name: 'series1',
-  //         data: [45, 66, 41, 89, 25, 44, 9, 54]
-  //       }
-  //     ],
-  //     yaxis: {
-  //       min: 5,
-  //       max: 95
-  //     },
-  //     tooltip: {
-  //       theme: 'dark',
-  //       fixed: {
-  //         enabled: false
-  //       },
-  //       x: {
-  //         show: false
-  //       },
-  //       y: {
-  //         title: {
-  //           formatter: function (seriesName) {
-  //             return 'Total Earning';
-  //           }
-  //         }
-  //       },
-  //       marker: {
-  //         show: false
-  //       }
-  //     }
-  //   };
-  //   var chart = new ApexCharts(document.querySelector('#tab-chart-1'), options);
-  //   chart.render();
-  // })();
-  //
-  // //  function 2
-  // (function () {
-  //   var options = {
-  //     chart: {
-  //       type: 'line',
-  //       height: 90,
-  //       sparkline: {
-  //         enabled: true
-  //       }
-  //     },
-  //     dataLabels: {
-  //       enabled: false
-  //     },
-  //     colors: ['#FFF'],
-  //     stroke: {
-  //       curve: 'smooth',
-  //       width: 3
-  //     },
-  //     series: [
-  //       {
-  //         name: 'series1',
-  //         data: [35, 44, 9, 54, 45, 66, 41, 69]
-  //       }
-  //     ],
-  //     yaxis: {
-  //       min: 5,
-  //       max: 95
-  //     },
-  //     tooltip: {
-  //       theme: 'dark',
-  //       fixed: {
-  //         enabled: false
-  //       },
-  //       x: {
-  //         show: false
-  //       },
-  //       y: {
-  //         title: {
-  //           formatter: function (seriesName) {
-  //             return 'Total Earning';
-  //           }
-  //         }
-  //       },
-  //       marker: {
-  //         show: false
-  //       }
-  //     }
-  //   };
-  //   var chart = new ApexCharts(document.querySelector('#tab-chart-2'), options);
-  //   chart.render();
-  // })();
-
-  // function 3 Resource This Year/Month
+  // function 1 Resource This Year/Month
   (function () {
     var options = {
       chart: {
@@ -133,7 +29,7 @@ function floatchart() {
 
       },
       colors: ['#00fffa', '#2196f3', '#673ab7', '#3a034b', '#cb38ff', '#ac6262'],
-      series: personal_resource_this_year,
+      series: personal_resource_months_of_project,
       responsive: [
         {
           breakpoint: 480,
@@ -186,7 +82,7 @@ function floatchart() {
 
           },
           colors: ['#00fffa', '#2196f3', '#673ab7', '#3a034b', '#cb38ff', '#ac6262'],
-          series: personal_resource_this_year,
+          series: personal_resource_months_of_project,
           responsive: [
             {
               breakpoint: 480,
@@ -232,7 +128,7 @@ function floatchart() {
             enabled: false
           },
           colors: ['#00fffa', '#2196f3', '#673ab7', '#3a034b', '#cb38ff', '#ac6262'],
-          series: personal_resource_this_year,
+          series: personal_resource_months_of_project,
           responsive: [
             {
               breakpoint: 480,
@@ -306,6 +202,7 @@ function floatchart() {
       }
     });
   })();
+
 
 
 
