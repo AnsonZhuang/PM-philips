@@ -1,40 +1,76 @@
-name: PM_env
+name: new3
 channels:
   - conda-forge
   - defaults
 dependencies:
+  - alembic=1.11.1=pyhd8ed1ab_0
   - aniso8601=9.0.1=pyhd3eb1b0_0
+  - asgiref=3.7.2=pyhd8ed1ab_0
   - attrs=22.1.0=py311haa95532_0
+  - backports.zoneinfo=0.2.1=py311h1ea47a8_7
   - bzip2=1.0.8=he774522_0
-  - ca-certificates=2023.5.7=h56e8100_0
+  - ca-certificates=2023.05.30=haa95532_0
+  - cffi=1.15.1=py311h2bbff1b_3
   - click=8.0.4=py311haa95532_0
   - colorama=0.4.6=py311haa95532_0
+  - cryptography=39.0.1=py311h21b164f_2
   - dataclasses=0.8=pyh6d0b6a4_7
+  - django=4.2.2=pyhd8ed1ab_0
+  - dnspython=2.2.1=py311haa95532_0
+  - email-validator=1.2.1=py311haa95532_0
+  - email_validator=1.2.1=hd3eb1b0_0
   - flask=2.0.2=pyhd3eb1b0_0
   - flask-login=0.6.2=pyhd8ed1ab_0
+  - flask-migrate=4.0.4=pyhd8ed1ab_0
+  - flask-minify=0.42=pyhd8ed1ab_0
   - flask-restx=0.5.1=pyhd3eb1b0_0
+  - flask-sqlalchemy=2.5.1=pyhd8ed1ab_0
   - flask-wtf=1.1.1=pyhd8ed1ab_0
+  - greenlet=2.0.1=py311hd77b12b_0
+  - htmlmin=0.1.12=py_1
+  - idna=3.4=py311haa95532_0
+  - importlib-metadata=6.7.0=pyha770c72_0
+  - importlib_resources=5.12.0=pyhd8ed1ab_0
   - itsdangerous=2.0.1=pyhd3eb1b0_0
   - jinja2=3.0.2=pyhd3eb1b0_0
+  - jsmin=3.0.1=pyhd8ed1ab_0
   - jsonschema=4.17.3=py311haa95532_0
+  - lesscpy=0.15.1=pyhd8ed1ab_0
   - libffi=3.4.4=hd77b12b_0
+  - mako=1.2.4=pyhd8ed1ab_0
   - markupsafe=2.1.1=py311h2bbff1b_0
   - openssl=3.0.9=h2bbff1b_0
   - pip=23.1.2=py311haa95532_0
+  - ply=3.11=py_1
+  - pycparser=2.21=pyhd3eb1b0_0
   - pyrsistent=0.18.0=py311h2bbff1b_0
   - python=3.11.3=he1021f5_1
   - python-dateutil=2.8.2=pyhd3eb1b0_0
+  - python-xxhash=3.2.0=py311ha68e1ae_0
+  - python_abi=3.11=2_cp311
   - pytz=2022.7=py311haa95532_0
+  - rcssmin=1.0.6=py311ha68e1ae_5
   - setuptools=67.8.0=py311haa95532_0
   - six=1.16.0=pyhd3eb1b0_1
+  - sqlalchemy=1.4.39=py311h2bbff1b_0
   - sqlite=3.41.2=h2bbff1b_0
+  - sqlparse=0.4.4=pyhd8ed1ab_0
   - tk=8.6.12=h2bbff1b_0
+  - typing-extensions=4.6.3=hd8ed1ab_0
+  - typing_extensions=4.6.3=pyha770c72_0
   - tzdata=2023c=h04d1e81_0
+  - ucrt=10.0.22621.0=h57928b3_0
   - vc=14.2=h21ff451_1
-  - vs2015_runtime=14.27.29016=h5e58377_2
+  - vc14_runtime=14.36.32532=hfdfe4a8_16
+  - vs2015_runtime=14.36.32532=h05e6639_16
   - werkzeug=2.0.3=pyhd3eb1b0_0
   - wheel=0.38.4=py311haa95532_0
   - wtforms=2.3.3=pyhd3eb1b0_0
+  - xxhash=0.8.1=hcfcfb64_0
   - xz=5.4.2=h8cc25b3_0
+  - zipp=3.15.0=pyhd8ed1ab_0
   - zlib=1.2.13=h8cc25b3_0
-prefix: E:\Miniconda3\envs\PM_env
+  - pip:
+    - flask-cdn==1.5.3
+    - python-dotenv==1.0.0
+prefix: E:\Miniconda3\envs\new3

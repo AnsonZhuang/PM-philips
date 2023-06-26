@@ -9,11 +9,25 @@
 * Bootstrap 5 (For UI)
 * Develop with Pycharm originally
 ## 1 Set up environment
-* ###  Using Conda with environment.yml to set up environment
+* ###  Using Conda with environment.yml (change prefix to your environment directory) to set up environment
 ```
 conda env create -f environment.yml -n new_env
+pip install python-dotenv
+pip install flask-cdn
+conda install email_validator
 ```
-## 2 Important Tools
+* ### Configure your database settings in .env file
+* ### Database tables are created by flask-sqlalchemy with command automatically (Refer to [Flask-SQLAlchemy](http://www.pythondoc.com/flask-sqlalchemy/) & [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) for details)
+```
+flask db init
+```
+* ### Database migrate command (Refer to [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) for details)
+```
+flask db migrate
+flask db upgrade
+```
+* ### Demo Data of tables need to be manually imported with .sql files (in folder SQL_import)
+## 2 Important Tools              
 * #### [ECharts](https://echarts.apache.org/zh/index.html) for data visualization
 * #### [Flask-SQLAlchemy](http://www.pythondoc.com/flask-sqlalchemy/) for database ORM
 * #### [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) for database migrate
