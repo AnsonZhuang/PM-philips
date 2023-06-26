@@ -26,7 +26,7 @@ YearOfProject = db.Table('year_of_project',
                          db.Column('year', db.Integer, primary_key=True)
                          )
 
-
+# Resource表 项目资源的核心数据 每一行表示该User在该Project在该Year的12个月的Resource分配百分比
 # Resource - user~project~year
 # For a project P and a year Y, each member M of P will have an entry in this table
 # to display their resource assigned to P in Y
@@ -59,12 +59,13 @@ class Resource(db.Model):
     )
 
 
+# manager与所管理的team的多对多映射关系
 # multi Manager - multi Team
 ManagerToTeam = db.Table('manager_to_team', db.Column('manager_id', db.Integer, db.ForeignKey('user.id')),
                          db.Column('team_id', db.Integer, db.ForeignKey('team.id'))
                          )
 
-
+# 用户类 包含了账号密码与个人信息 与登录注册模块相关
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     # e.g. 320221138
@@ -129,7 +130,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return str(self.username)
 
-
+# Project类 在新建Project和更新Project信息时需要处理各项属性
 class Project(db.Model):
     __tablename__ = 'project'
     # Project's info
@@ -158,7 +159,7 @@ class Project(db.Model):
     manager = db.relationship('User', uselist=False, foreign_keys='Project.manager_id',
                               back_populates='managed_projects')
 
-    # ==========项目相关时间==========
+    # ==========项目相关时间 # 暂未在逻辑中使用 后续可变动==========
     # 项目在系统中被创建的时间
     create_date = db.Column(db.Date, default=date.today(), nullable=False)
     # 项目在系统中被关闭的时间 初始化时默认为创建时间
@@ -194,7 +195,11 @@ class Project(db.Model):
     def __repr__(self):
         return str(self.name)
 
-
+# TODO 暂未在逻辑中使用 后续可变动
+# 拟定以注解/装饰器的方式实现用户权限管理, boolean表示是否拥有权限
+# access - 用户访问该team的user和project信息的权限
+# manage - 用户管理该team的成员&配置该team的project的权限
+# config - 用户配置各成员该team的access/manage/config权限的权限
 class UserPermission(db.Model):
     __tablename__ = 'user_permission'
     # single User - single UserPermission
@@ -229,7 +234,7 @@ class UserPermission(db.Model):
     def __repr__(self):
         return 'UserAccess:{}'.format(str(self.name))
 
-
+# user属性 - role
 class Role(db.Model):
     __tablename__ = 'role'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -241,7 +246,7 @@ class Role(db.Model):
     def __repr__(self):
         return 'Role:{}'.format(str(self.name))
 
-
+# user属性 - team
 class Team(db.Model):
     __tablename__ = 'team'
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)  # e.g. 1
@@ -257,6 +262,7 @@ class Team(db.Model):
         return 'Team:{}'.format(str(self.short_name))
 
 
+# Project属性 - 优先级
 class ProjectPriority(db.Model):
     __tablename__ = 'project_priority'
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)
@@ -268,6 +274,7 @@ class ProjectPriority(db.Model):
         return 'Project Priority:{}'.format(str(self.name))
 
 
+# Project属性 - 产品
 class ProjectProduct(db.Model):
     __tablename__ = 'project_product'
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)
@@ -279,6 +286,7 @@ class ProjectProduct(db.Model):
         return 'Project Product:{}'.format(str(self.name))
 
 
+# Project属性 - 状态
 class ProjectStatus(db.Model):
     __tablename__ = 'project_status'
     id = db.Column(db.Integer, primary_key=True, autoincrement=False)
@@ -290,9 +298,11 @@ class ProjectStatus(db.Model):
         return 'Project Status:{}'.format(str(self.name))
 
 
+# TODO 暂未在逻辑中使用 后续可变动
+# Project的操作日志
 class ProjectOperationLog(db.Model):
     __tablename__ = 'project_operation_log'
-    # 暂定Log记录id生成策略为:共16位 前14位为 插入时的datetime(yyyy-mm-dd-hh-mm-ss)转换为14位纯数字 低2位从00开始 如重复则+1
+    # 暂定Log记录id生成策略为:共16位 前14位为 插入时的datetime(yyyy-mm-dd-hh-mm-ss)转换为14位纯数字 低2位从00开始 如已存在则+1
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=False)
     # 发生时间
     log_time = db.Column(db.DateTime, nullable=False)

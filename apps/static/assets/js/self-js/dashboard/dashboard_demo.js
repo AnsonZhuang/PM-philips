@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
         floatchart();
-        floatchart2();
     }, 500);
 });
 

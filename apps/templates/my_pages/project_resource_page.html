@@ -2,18 +2,32 @@
 
 {% block title %} Project Resource Page {% endblock title %}
 {% block content %}
+  <style>
+      .project-page-card-title {
+          padding-bottom: 8px;
+          padding-top:12px;
+      }
+      .project-page-card-body {
+          padding-top: 10px;
+          padding-bottom: 12px;
+      }
+  </style>
   <script>
-      // e.g. 'chart'
-      var chart_project_name = "{{ datadict['project_name'] }}";
-      var chart_year = "{{ datadict['year'] }}";
-      var chart_dataframe = {{ dataset['dataframe']|tojson }};
-      var chart_row_cnt = {{ dataset['size'][0] }};
-      var chart_col_cnt = {{ dataset['size'][1] }};
-      console.log(chart_row_cnt);
-      console.log(chart_col_cnt);
+      // For chart
+      var chart_project_name = "{{ chart_datadict['project_name'] }}";
+      var chart_year = "{{ chart_datadict['year'] }}";
+      var chart_dataframe = {{ chart_dataset['dataframe']|tojson }};
+      var chart_dataframe_pie = {{ chart_dataset_2['dataframe']|tojson }};
+      var chart_row_cnt = {{ chart_dataset['size'][0] }};
+      var chart_col_cnt = {{ chart_dataset['size'][1] }};
+      // For table
+      var table_datasource = {{ table_dataset['dataframe']|tojson }}['source'];
+      var table_datadict = {{ table_datadict|tojson }};
+      console.log(table_datasource);
   </script>
   <div class="pc-container">
     <div class="pc-content">
+
       <!-- 相对路径 start -->
       <div class="page-header">
         <div class="page-block">
@@ -36,42 +50,95 @@
 
       <!-- [ Main Content ] start -->
       <div class="row">
-        <!-- [ Typography ] start -->
-        <div class="col-sm-12">
+        {# 标题 #}
+        <h1 class="page-header-title" style="margin-left: 10px;margin-bottom: 20px;">Project Dashboard</h1>
 
-          <!-- First Card start -->
-          <!-- Basic Info with Nav-->
-
-          <div class="card text-center">
-            <div class="card-header">
-              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
-                </li>
-              </ul>
-            </div>
-
+        {# Cards Module start #}
+        {# Project Name#}
+        <div class="col-lg-4">
+          <div class="card" style="height: 130px">
             <div class="card-body">
-              <div class="tab-content" id="pills-tabContent">
-                  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">A</div>
-                  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">B</div>
-                  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">C</div>
-              </div>
+            <div class="h2 m-0">{{ card_datadict['project_name'] }}</div>
+            <div class="text-muted mb-3">Name</div>
             </div>
           </div>
-          <!-- First Card End -->
+        </div>
+        {# Product #}
+        <div class="col-lg-2">
+          <div class="card" style="height: 130px">
+            <div class="card-body">
+            <div class="h2 m-0"><a href="#">{{ card_datadict['product'] }}</a></div>
+            <div class="text-muted mb-3">Product</div>
+            </div>
+          </div>
+        </div>
+        {# PM #}
+        <div class="col-lg-2">
+          <div class="card" style="height: 130px">
+            <div class="card-body">
+            <div class="h2 m-0"><a href="#">{{ card_datadict['PM'] }}</a></div>
+            <div class="text-muted mb-3">PM</div>
+            </div>
+          </div>
+        </div>
+        {# Priority #}
+        <div class="col-lg-2">
+          <div class="card" style="height: 130px">
+            <div class="card-body">
+            <div class="h2 m-0"><a href="#">{{ card_datadict['priority'] }}</a></div>
+            <div class="text-muted mb-3">Priority</div>
+            </div>
+          </div>
+        </div>
+        {# Status #}
+        <div class="col-lg-2">
+          <div class="card" style="height: 130px">
+            <div class="card-body">
+            <div class="h2 m-0"><a href="#">{{ card_datadict['status'] }}</a></div>
+            <div class="text-muted mb-3">Status</div>
+            </div>
+          </div>
+        </div>
+        {# Second Row #}
 
-          <!-- Second Card start -->
+  <div class="col-lg-4" style="height: 200px; padding-bottom: 25px">
+    <div class="card d-flex flex-column h-100">
+      <div class="card-header project-page-card-title">
+        <h5>RfD</h5>
+      </div>
+      <div class="card-body flex-grow-1 overflow-auto project-page-card-body">
+        <p class="card-text">
+          {{ card_datadict['rfd'] }}
+        </p> </div>
+      </div>
+  </div>
+
+  <div class="col-lg-4" style="height: 200px; padding-bottom: 25px">
+    <div class="card d-flex flex-column h-100">
+      <div class="card-header project-page-card-title">
+        <h5>Scope</h5>
+      </div>
+      <div class="card-body flex-grow-1 overflow-auto project-page-card-body"><p class="card-text">{{ card_datadict['scope'] }}</p></div>
+    </div>
+  </div>
+
+  <div class="col-lg-4" style="height: 200px; padding-bottom: 25px">
+    <div class="card d-flex flex-column h-100">
+      <div class="card-header project-page-card-title">
+        <h5>Comment</h5>
+      </div>
+      <div class="card-body flex-grow-1 overflow-auto project-page-card-body"><p class="card-text">{{ card_datadict['comment'] }}</p></div>
+    </div>
+  </div>
+
+        {# Cards Module end #}
+
+        {# Chart Module start #}
+        <div class="col-sm-12">
           <!-- Chart -->
           <div class="card">
-            <div class="card-header" style="padding-bottom: 10px;">
-              <h3>{{ datadict['project_name'] }}</h3>
+            <div class="card-header project-page-card-title">
+              <h3>Charts</h3>
             </div>
             <div class="card-body" style="padding-bottom:40px;">
 
@@ -84,7 +151,6 @@
                         <option selected>Months(bar)</option>
                         <option>Months(pie)</option>
                         <option>Members(bar)</option>
-                        <option>Members(pie)</option>
                       </select>
                     </div>
                   </div>
@@ -95,9 +161,124 @@
           </div>
           <!-- Second Card end -->
         </div>
+        {# Chart Module end #}
 
+        {# Table Module start #}
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header project-page-card-title">
+              <h3>Tables</h3>
+            </div>
+            <div class="card-body" style="padding-bottom:40px;">
+              <div style="width: 100%;display: flex; margin-bottom: 20px">
+{#                 Table Start #}
+                <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                      {% for col in table_datalabel %}
+                        <th>{{ col }}</th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for row in table_dataframe %}
+                      <tr>
+                      {% for each in row %}
+                        <td>{{ each }}</td>
+                      {% endfor %}
+                        <td class="edit-btn-td">
+                          {#  通过button把当前用户信息以字典形式传到modal  #}
+                          <button class="btn btn-primary edit-btn" type="button" data-bs-toggle="modal" data-bs-target="#edit-Modal" data-bs-whatever="{{ row }}">Edit</button>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  {# 更新用户信息的模态框below #}
+                  <div class="modal fade" id="edit-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-3" id="modal-title">Update Resource</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
 
-        {#        <!-- [ sample-page ] end -->#}
+                        <div class="modal-body">
+                          <form>
+                            <div class="form-group">
+                              <label for="id-display" class="col-form-label">id:</label>
+                              <input type="text" class="form-control" id="id-display" name="id" disabled>
+                            </div>
+                            <div class="form-group">
+                              <label for="username-display" class="col-form-label">Username:</label>
+                              <input type="text" class="form-control" id="username-display" name="username" disabled>
+                            </div>
+                            <div class="row g-3">
+                              <div class="col-md-1 text-center" >
+                                <label for="inputJan">Jan</label>
+                                <input type="text" class="form-control" id="inputJan">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputFeb">Feb</label>
+                                <input type="text" class="form-control" id="inputFeb">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputMar">Mar</label>
+                                <input type="text" class="form-control" id="inputMar">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputApr">Apr</label>
+                                <input type="text" class="form-control" id="inputApr">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputMay">May</label>
+                                <input type="text" class="form-control" id="inputMay">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputJun">Jun</label>
+                                <input type="text" class="form-control" id="inputJun">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputJul">Jul</label>
+                                <input type="text" class="form-control" id="inputJul">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputAug">Aug</label>
+                                <input type="text" class="form-control" id="inputAug">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputSep">Sep</label>
+                                <input type="text" class="form-control" id="inputSep">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputOct">Oct</label>
+                                <input type="text" class="form-control" id="inputOct">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputNov">Nov</label>
+                                <input type="text" class="form-control" id="inputNov">
+                              </div>
+                              <div class="col-md-1 text-center">
+                                <label for="inputDec">Dec</label>
+                                <input type="text" class="form-control" id="inputDec">
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary row-update-btn">Update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {# 模态框above #}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {# Table Module end #}
       </div>
       <!-- [ Main Content ] end -->
     </div>
@@ -108,11 +289,11 @@
 {% block extra_js %}
   <script>
       {# Set the chart container size #}
-      document.getElementById('chart').style.height = (chart_row_cnt * 55 + 120).toString().concat("px");
-
+      document.getElementById('chart').style.height = (chart_row_cnt * 55 + 180).toString().concat("px");
   </script>
   <!-- Apex Chart -->
   <script src="{{ url_for('static', filename='assets/js/plugins/echarts.min.js') }}"></script>
   <script src="{{ url_for('static', filename='assets/js/self-js/dashboard/project_resource_page.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/self-js/dashboard/project_resource_update.js') }}"></script>
   <!-- [Page Specific JS] end -->
 {% endblock extra_js %}

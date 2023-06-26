@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
         floatchart();
-        floatchart2();
     }, 500);
 });
 
@@ -84,57 +83,6 @@ function floatchart() {
         chartSelector.addEventListener('change', function () {
             var selectedValue = chartSelector.value;
             if (selectedValue === 'Months(bar)') {
-                // var new_option = {
-                //     title: {
-                //         text: "Personal Resource in " + chart_year,
-                //         subtext: chart_project_name,
-                //         left: "center",
-                //         top: 'top',
-                //         textStyle: {
-                //             fontSize: 15
-                //         },
-                //         subtextStyle: {
-                //             fontSize: 12
-                //         }
-                //     },
-                //     legend: {
-                //         top: '15%',
-                //     },
-                //     tooltip: {
-                //         trigger: 'axis',
-                //         axisPointer: {
-                //             type: 'shadow'
-                //         }
-                //     },
-                //     grid: {
-                //         top: '25%',
-                //         left: '10%',
-                //         right: '2%',
-                //         bottom: '7%',
-                //         containLabel: false
-                //     },
-                //     textStyle: {
-                //         color: 'black'
-                //     },
-                //     xAxis: {},
-                //     yAxis: {type: 'category'},
-                //     dataset: chart_dataframe,
-                //     color: ['#3C1361', '#5E2D79', '#7B4F8E', '#986EA3',
-                //         '#B18FCF', '#C9B9E8', '#D7D2EE', '#BDD8EA',
-                //         '#A2C8EC', '#7FA3D1', '#5E7FA2', '#3C5F73'],
-                //     series: Array(12).fill(
-                //         {
-                //             type: 'bar',
-                //             stack: 'total',
-                //             // seriesLayoutBy: 'row',
-                //             label: {show: true},
-                //             // barWidth: '100%',
-                //             emphasis: {
-                //                 focus: 'series'
-                //             }
-                //         }
-                //     ),
-                // };
                 var new_option = option;
                 myChart.setOption(new_option, true)
             } else if (selectedValue == 'Months(pie)') {
@@ -164,7 +112,7 @@ function floatchart() {
                     },
                     grid: {
                         top: 95,
-                        left: '6%',
+                        left: '2%',
                         right: '2%',
                         bottom: '7%',
                         containLabel: true,

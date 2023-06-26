@@ -4,7 +4,6 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 import os
-
 from flask_migrate import Migrate
 from flask_minify import Minify
 from sys import exit
@@ -53,10 +52,11 @@ if DEBUG:
 #             pass
 #
 #
-# # 上下文处理器 渲染的所有模板都会执行这个函数 返回字典包含需要在模板中使用的全局变量
+# 上下文处理注解 - 渲染的所有模板都会执行这个函数 返回字典包含需要在模板中使用的全局变量
+# TODO 如有需求可取消注释 用于各个模板中需要使用的全局变量
+# @login required
 # @app.context_processor
 # def context_processor():
-#     # 如果已经是登录状态
 #     if hasattr(g, "user"):
 #         # print(g.user.id)
 #         # print(g.access.role)

@@ -47,10 +47,7 @@
 
   {#              <div id="chart" style="width: 70%"></div>#}
             <div style="width: 100%;display: flex; margin-bottom: 20px">
-                <div style="width: 20%;height: 100%; background-color: #fff;">
-{#                    <div id="chart4_2" style="height: 100%;width: 100%"></div>#}
-                </div>
-                <div style="width: 80%;height: 100%">
+                <div style="width: 100%;height: 100%">
               <div class="row mb-3 align-items-center">
                 <div class="col-auto">
                   <select id="chart-selector" class="form-select p-r-35">
@@ -79,7 +76,7 @@
 
 {% block extra_js %}
   <script>
-      {# Set the chart container size #}
+      {# Set the chart container size according to the dimension of the dataset #}
       document.getElementById('chart').style.height = (chart_row_cnt * 55 + 120).toString().concat("px");
   </script>
   <!-- Apex Chart -->

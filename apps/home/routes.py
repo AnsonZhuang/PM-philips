@@ -2,14 +2,18 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
+import json
 
+from apps import db
+from apps.authentication.models import Resource
 from apps.home import blueprint
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from jinja2 import TemplateNotFound
 from apps.database.query import query_user_by_id, get_all_projects_count, query_project_by_id
-from apps.database.prepare_dataset import prepare_user_year_resource_chart, prepare_project_year_resource_chart, \
-    prepare_allProjectListByPage_Table
+from apps.database.prepare_dataset import prepare_user_year_resource_chart, prepare_project_year_resource_barchart, \
+    prepare_allProjectListByPage_Table, prepare_project_cards, prepare_project_year_resource_table, \
+    prepare_project_year_resource_piechart
 from datetime import date
 
 
@@ -18,7 +22,7 @@ from datetime import date
 @blueprint.route('/index')
 @login_required
 def index():
-    user_id = 320221138
+    user_id = 1001
     year = 2023
 
     dataset = prepare_user_year_resource_chart(user_id, year)
@@ -34,6 +38,7 @@ def index():
     # of the <div> label containing the chart depending on
     # the number of the item
     return render_template('pages/index_demo.html', dataset=dataset, datadict=datadict)
+
 
 @blueprint.route('/project_list')
 @login_required
@@ -89,6 +94,7 @@ def project_list():
     #                            search_str=search_str)
     #
 
+
 @blueprint.route('/project_resource_page')
 @login_required
 def project_resource_page():
@@ -98,15 +104,23 @@ def project_resource_page():
     else:
         # TODO Render serveral charts to display information of the chosen project
         project_id = id
-        year = 2023
-        dataset = prepare_project_year_resource_chart(project_id, year)
         project_name = query_project_by_id(project_id).name
+        year = 2023
 
-        datadict = {
+        # 渲染card数据
+        card_datadict = prepare_project_cards(id)
+
+        # 渲染barchart数据
+        chart_dataset = prepare_project_year_resource_barchart(project_id, year)
+        # 渲染piechart数据
+        chart_dataset_2 = prepare_project_year_resource_piechart(project_id, year)
+
+        chart_datadict = {
             'project_id': project_id,
             'project_name': project_name,
             'year': year
         }
+
         selection_text = {
             "member_months_bar": "Each Member-Months(Bar)",
             "member_months_pie": "Each Member-Months(Pie)",
@@ -114,11 +128,27 @@ def project_resource_page():
             "month_members_pie": "Each Month-Members(Pie)",
         }
 
+
+
+        # 渲染table数据
+        table_dataset = prepare_project_year_resource_table(project_id, year)
+        table_datalabel = table_dataset['dataframe']['source'][0]
+        table_dataframe = table_dataset['dataframe']['source'][1:]
+        table_datadict = {
+            'project_id': project_id,
+            'project_name': project_name,
+            'year': year
+        }
+
         # Pass a parameter as the reference for the width/height
         # of the <div> label containing the chart depending on
         # the number of the item
-        return render_template('my_pages/project_resource_page.html', dataset=dataset, datadict=datadict,
-                               selection_text=selection_text)
+        return render_template('my_pages/project_resource_page.html',
+                               card_datadict=card_datadict, chart_dataset=chart_dataset, chart_dataset_2=chart_dataset_2,
+                               chart_datadict=chart_datadict, selection_text=selection_text,
+                               table_dataset=table_dataset, table_datalabel=table_datalabel,
+                               table_dataframe=table_dataframe, table_datadict=table_datadict)
+
 
 @blueprint.route('/user_resource_page')
 @login_required
@@ -139,11 +169,39 @@ def user_resource_page():
             'username': username,
             'year': year
         }
-
-        # Pass a parameter as the reference for the width/height
-        # of the <div> label containing the chart depending on
-        # the number of the item
         return render_template('my_pages/user_resource_page.html', dataset=dataset, datadict=datadict)
+
+
+@blueprint.route("/update-project-resource", methods=['POST'])
+@login_required
+def update_project_resource():
+    # role = g.access.role
+    # admin权限
+    if request.method == 'POST':
+        data = json.loads(request.get_data())
+        print(data)
+        # For query
+        user_id = data['user_id']
+        project_id = data['project_id']
+        year = data['year']
+        resource = Resource.query.filter_by(user_id=user_id, project_id=project_id, year=year).first()
+        resource.Jan = data['Jan']
+        resource.Feb = data['Feb']
+        resource.Mar = data['Mar']
+        resource.Apr = data['Apr']
+        resource.May = data['May']
+        resource.Jun = data['Jun']
+        resource.Jul = data['Jul']
+        resource.Aug = data['Aug']
+        resource.Sep = data['Sep']
+        resource.Oct = data['Oct']
+        resource.Nov = data['Nov']
+        resource.Dec = data['Dec']
+        db.session.commit()
+        cur_resource = Resource.query.filter_by(user_id=user_id, project_id=project_id, year=year).first()
+        print(cur_resource)
+        return "update project resource"
+
 
 # ============================= My Functions End =============================
 
@@ -157,6 +215,7 @@ def typography():
 @login_required
 def color():
     return render_template('pages/color.html')
+
 
 @blueprint.route('/icon-tabler')
 @login_required
