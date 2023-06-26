@@ -47,6 +47,7 @@ conda env create -f environment.yml -n new_env
    |    |    |    |-- js/
    |    |    |    |    |-- self-js/
    |    |    |    |    |    |-- <js>       # .js files of Core Functional Pages
+   |    |
    |    |-- templates/
    |         |-- my_pages/                 
    |         |    |-- <html>               # .html files of Core Functional Pages
