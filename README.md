@@ -1,4 +1,4 @@
-# PM[] (Project Management)
+# [PM](https://github.com/AnsonZhuang/PM-philips) (Project Management)
 * Based on **[Flask-Berry-Dashboard](https://github.com/app-generator/flask-berry-dashboard)**, go to the github page to get details of:
   * Original Flask Dashboard project
   * How to set up the environment  
