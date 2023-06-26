@@ -1,0 +1,9 @@
+INSERT INTO pm.role (id, name) VALUES (99, 'admin');
+INSERT INTO pm.role (id, name) VALUES (20, 'director');
+INSERT INTO pm.role (id, name) VALUES (5, 'employee');
+INSERT INTO pm.role (id, name) VALUES (1, 'guest');
+INSERT INTO pm.role (id, name) VALUES (11, 'L1_project_manager');
+INSERT INTO pm.role (id, name) VALUES (12, 'L2_project_manager');
+INSERT INTO pm.role (id, name) VALUES (13, 'L3_project_manager');
+INSERT INTO pm.role (id, name) VALUES (14, 'L4_project_manager');
+INSERT INTO pm.role (id, name) VALUES (15, 'L5_project_manager');

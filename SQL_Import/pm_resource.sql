@@ -1,0 +1,15 @@
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1001, 1, 2023, 16, 15, 15, 10, 10, 25, 25, 25, 35, 25, 25, 35);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1001, 2, 2023, 25, 35, 35, 35, 40, 35, 25, 35, 0, 35, 10, 30);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1001, 3, 2023, 10, 35, 35, 15, 40, 25, 40, 40, 35, 25, 15, 0);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1001, 4, 2023, 50, 25, 50, 50, 50, 25, 25, 25, 25, 25, 15, 10);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1002, 1, 2023, 13, 35, 10, 15, 35, 25, 15, 25, 35, 10, 35, 35);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1002, 2, 2023, 25, 15, 10, 35, 35, 40, 35, 35, 15, 35, 10, 30);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1002, 3, 2023, 10, 15, 10, 10, 15, 25, 25, 15, 15, 25, 15, 15);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1003, 1, 2023, 10, 15, 25, 25, 10, 25, 10, 25, 35, 10, 35, 15);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1003, 2, 2023, 25, 15, 15, 35, 40, 40, 25, 25, 0, 15, 10, 30);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1003, 3, 2023, 10, 15, 25, 40, 0, 25, 35, 50, 25, 25, 0, 15);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1003, 4, 2023, 50, 25, 25, 50, 35, 25, 25, 25, 15, 25, 10, 10);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1004, 1, 2023, 25, 35, 15, 10, 25, 25, 10, 25, 35, 15, 15, 35);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1004, 2, 2023, 25, 35, 35, 35, 40, 40, 10, 10, 0, 35, 10, 15);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1004, 3, 2023, 10, 35, 35, 0, 40, 25, 25, 10, 25, 25, 0, 0);
+INSERT INTO pm.resource (user_id, project_id, year, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, `Dec`) VALUES (1004, 4, 2023, 50, 10, 35, 25, 40, 40, 25, 25, 15, 25, 10, 10);
